@@ -1,0 +1,2816 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    116294,       2808]
+NotebookOptionsPosition[    110777,       2706]
+NotebookOutlinePosition[    111117,       2721]
+CellTagsIndexPosition[    111074,       2718]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+Markov chain associated to the single-bit flip mutation operator on a \
+two-dimensional binary Hamming graph\
+\>", "Section",
+ CellChangeTimes->{{3.780998707187126*^9, 3.7809989085654984`*^9}, {
+  3.780998960321219*^9, 3.780998961488813*^9}, {3.781000416010092*^9, 
+  3.781000416090716*^9}},ExpressionUUID->"208c0469-ca1d-4623-8092-\
+c1ff3053ea94"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"hyp22", "=", 
+   RowBox[{"HypercubeGraph", "[", "2", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"hyp22Adj", "=", 
+   RowBox[{"AdjacencyMatrix", "[", "hyp22", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"hyp22Diag", "=", 
+    RowBox[{"DiagonalMatrix", "[", 
+     RowBox[{"VertexDegree", "[", "hyp22", "]"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"Transition", " ", 
+     RowBox[{"matrix", ":", " ", "T"}]}], " ", "=", " ", 
+    SuperscriptBox["AD", 
+     RowBox[{"-", "1"}]]}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"hyp22Trans", "=", 
+    RowBox[{"hyp22Adj", ".", 
+     RowBox[{"Inverse", "[", "hyp22Diag", "]"}]}]}], ";"}], " "}]}], "Input",
+ CellChangeTimes->{{3.780935935349592*^9, 3.780935953888062*^9}, {
+  3.780935989901832*^9, 3.7809359917287703`*^9}, {3.780936970278233*^9, 
+  3.780937056650133*^9}, {3.780937140226987*^9, 3.780937140549073*^9}, {
+  3.78099870303549*^9, 3.780998704503481*^9}, {3.7809996191103973`*^9, 
+  3.780999679836875*^9}},ExpressionUUID->"0ebf98be-4c3d-4515-833e-\
+6d46586c9d35"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["hyp22"], "Input",
+ CellChangeTimes->{{3.780937113270247*^9, 3.7809371178385563`*^9}, {
+  3.7809986517199097`*^9, 
+  3.7809986818206463`*^9}},ExpressionUUID->"0cae4bd3-12ab-4f6f-878a-\
+2e2ace0184ab"],
+
+Cell[BoxData[
+ GraphicsBox[
+  NamespaceBox["NetworkGraphics",
+   DynamicModuleBox[{Typeset`graph = HoldComplete[
+     Graph[{1, 2, 3, 4}, {Null, 
+       SparseArray[
+       Automatic, {4, 4}, 0, {
+        1, {{0, 2, 4, 6, 8}, {{2}, {3}, {1}, {4}, {1}, {4}, {2}, {3}}}, 
+         Pattern}]}, {GraphLayout -> "GridEmbedding"}]]}, 
+    TagBox[
+     GraphicsGroupBox[
+      GraphicsComplexBox[{{1., 1.}, {1., 2.}, {2., 1.}, {2., 2.}}, {
+        {Hue[0.6, 0.7, 0.5], Opacity[0.7], 
+         {Arrowheads[0.], ArrowBox[{1, 2}, 0.01273]}, 
+         {Arrowheads[0.], ArrowBox[{1, 3}, 0.01273]}, 
+         {Arrowheads[0.], ArrowBox[{2, 4}, 0.01273]}, 
+         {Arrowheads[0.], ArrowBox[{3, 4}, 0.01273]}}, 
+        {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+         DiskBox[1, 0.01273], DiskBox[2, 0.01273], DiskBox[3, 0.01273], 
+         DiskBox[4, 0.01273]}}]],
+     MouseAppearanceTag["NetworkGraphics"]],
+    AllowKernelInitialization->False]],
+  DefaultBaseStyle->{
+   "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+  FormatType->TraditionalForm,
+  FrameTicks->None,
+  ImageSize->{194., Automatic}]], "Output",
+ CellChangeTimes->{
+  3.7809371183732347`*^9, {3.7809986615222673`*^9, 3.780998691282482*^9}, 
+   3.780999124964548*^9},ExpressionUUID->"e263afaf-0a6f-4a20-b177-\
+71dce81b7d4e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"hyp22Trans", "//", "MatrixForm"}]], "Input",ExpressionUUID->"96527b8f-4d3f-4439-bb9a-d2c9e0fb4d5b"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"0", 
+      FractionBox["1", "2"], 
+      FractionBox["1", "2"], "0"},
+     {
+      FractionBox["1", "2"], "0", "0", 
+      FractionBox["1", "2"]},
+     {
+      FractionBox["1", "2"], "0", "0", 
+      FractionBox["1", "2"]},
+     {"0", 
+      FractionBox["1", "2"], 
+      FractionBox["1", "2"], "0"}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.7809371183732347`*^9, 3.780998661544729*^9, 
+  3.780998693980712*^9, 
+  3.780999124972628*^9},ExpressionUUID->"230daf2b-c5ca-45c5-913b-\
+b68b61b55b11"]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"start1", "=", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "0", ",", "0", ",", "0"}], "}"}]}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "initial", " ", "probability", " ", "distribution", " ", "over", " ", 
+    "states"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"p1", "=", 
+   RowBox[{"DiscreteMarkovProcess", "[", 
+    RowBox[{"start1", ",", "hyp22Trans"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.780937276966013*^9, 3.780937290721356*^9}, {
+   3.780937460406869*^9, 3.780937460797097*^9}, {3.780998993021152*^9, 
+   3.780999025452853*^9}, 3.7809990705549603`*^9, {3.780999775251848*^9, 
+   3.780999776319083*^9}},ExpressionUUID->"af6a61c9-2f4b-470c-bcdd-\
+3fd0dfa21f17"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Graph", "[", "p1", "]"}]], "Input",
+ CellChangeTimes->{
+  3.780999080086566*^9},ExpressionUUID->"c2c03a38-80fd-4924-b426-\
+fca2eb87b95f"],
+
+Cell[BoxData[
+ GraphicsBox[
+  NamespaceBox["NetworkGraphics",
+   DynamicModuleBox[{Typeset`graph = HoldComplete[
+     Graph[{1, 2, 3, 4}, {
+       SparseArray[
+       Automatic, {4, 4}, 0, {
+        1, {{0, 2, 4, 6, 8}, {{2}, {3}, {1}, {4}, {1}, {4}, {2}, {3}}}, 
+         Pattern}], Null}, {EdgeLabels -> {DirectedEdge[3, 4] -> Placed[
+           Rational[1, 2], Tooltip], DirectedEdge[2, 4] -> Placed[
+           Rational[1, 2], Tooltip], DirectedEdge[4, 2] -> Placed[
+           Rational[1, 2], Tooltip], DirectedEdge[2, 1] -> Placed[
+           Rational[1, 2], Tooltip], DirectedEdge[3, 1] -> Placed[
+           Rational[1, 2], Tooltip], DirectedEdge[1, 3] -> Placed[
+           Rational[1, 2], Tooltip], DirectedEdge[4, 3] -> Placed[
+           Rational[1, 2], Tooltip], DirectedEdge[1, 2] -> Placed[
+           Rational[1, 2], Tooltip]}, EdgeStyle -> {
+         Arrowheads[Medium]}, GraphLayout -> "SpringElectricalEmbedding", 
+       ImagePadding -> All, 
+       Properties -> {
+        DirectedEdge[3, 4] -> {"Probability" -> Rational[1, 2]}, 
+         DirectedEdge[1, 2] -> {"Probability" -> Rational[1, 2]}, 
+         DirectedEdge[4, 3] -> {"Probability" -> Rational[1, 2]}, 
+         DirectedEdge[1, 3] -> {"Probability" -> Rational[1, 2]}, 
+         DirectedEdge[2, 4] -> {"Probability" -> Rational[1, 2]}, 
+         DirectedEdge[4, 2] -> {"Probability" -> Rational[1, 2]}, 
+         DirectedEdge[3, 1] -> {"Probability" -> Rational[1, 2]}, 
+         DirectedEdge[2, 1] -> {"Probability" -> Rational[1, 2]}}, 
+       VertexLabels -> {
+         Placed["Name", Center]}, 
+       VertexShapeFunction -> {
+        1 -> "Circle", 4 -> "Circle", 2 -> "Circle", 3 -> "Circle"}, 
+       VertexSize -> {0.27}, 
+       VertexStyle -> {
+        1 -> Hue[0.14, 1, 0.9], 2 -> Hue[0.14, 1, 0.9], 3 -> 
+         Hue[0.14, 1, 0.9], 4 -> Hue[0.14, 1, 0.9]}}]]}, 
+    TagBox[GraphicsGroupBox[{
+       {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0., 0.02994455497052806}, {
+           0.5049694277708394, 0.17942793049115008`}, {1.00009064555484, 0.}}]
+           , 0.13491912887816015`],
+          FractionBox["1", "2"]],
+         Annotation[#, 
+          Rational[1, 2], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0., 
+           0.02994455497052806}, {-0.14888544980378654`, 
+           0.5350886908087612}, {0.03112738447310398, 1.029995605925754}}], 
+           0.13491912887816015`],
+          FractionBox["1", "2"]],
+         Annotation[#, 
+          Rational[1, 2], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.00009064555484, 0.}, {
+           0.49512121778400237`, -0.14948337552061855`}, {0., 
+           0.02994455497052806}}], 0.13491912887816015`],
+          FractionBox["1", "2"]],
+         Annotation[#, 
+          Rational[1, 2], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.00009064555484, 0.}, {
+           0.8507816071249865, 0.5044641036867835}, {1.0300499011615263`, 
+           0.99907516261922}}], 0.13491912887816015`],
+          FractionBox["1", "2"]],
+         Annotation[#, 
+          Rational[1, 2], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.03112738447310398, 1.029995605925754}, {
+           0.1800128342768911, 0.5248514700875225}, {0., 
+           0.02994455497052806}}], 0.13491912887816015`],
+          FractionBox["1", "2"]],
+         Annotation[#, 
+          Rational[1, 2], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.03112738447310398, 1.029995605925754}, {
+           0.535673223617879, 1.178798949294307}, {1.0300499011615263`, 
+           0.99907516261922}}], 0.13491912887816015`],
+          FractionBox["1", "2"]],
+         Annotation[#, 
+          Rational[1, 2], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.0300499011615263`, 0.99907516261922}, {
+           1.1793589395913815`, 0.4946110589325834}, {1.00009064555484, 0.}}],
+            0.13491912887816015`],
+          FractionBox["1", "2"]],
+         Annotation[#, 
+          Rational[1, 2], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.0300499011615263`, 0.99907516261922}, {
+           0.5255040620167564, 0.850271819250292}, {0.03112738447310398, 
+           1.029995605925754}}], 0.13491912887816015`],
+          FractionBox["1", "2"]],
+         Annotation[#, 
+          Rational[1, 2], "Tooltip"]& ]}, 
+       {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], {
+         {Hue[0.14, 1, 0.9], 
+          DiskBox[{0., 0.02994455497052806}, 0.13491912887816015]}, 
+         InsetBox["1", {0., 0.02994455497052806},
+          BaseStyle->"Graphics"]}, {
+         {Hue[0.14, 1, 0.9], 
+          DiskBox[{1.00009064555484, 0.}, 0.13491912887816015]}, 
+         InsetBox["2", {1.00009064555484, 0.},
+          BaseStyle->"Graphics"]}, {
+         {Hue[0.14, 1, 0.9], 
+          DiskBox[{0.03112738447310398, 1.029995605925754}, 
+           0.13491912887816015]}, 
+         InsetBox["3", {0.03112738447310398, 1.029995605925754},
+          BaseStyle->"Graphics"]}, {
+         {Hue[0.14, 1, 0.9], 
+          DiskBox[{1.0300499011615263, 0.99907516261922}, 
+           0.13491912887816015]}, 
+         InsetBox["4", {1.0300499011615263, 0.99907516261922},
+          BaseStyle->"Graphics"]}}}],
+     MouseAppearanceTag["NetworkGraphics"]],
+    AllowKernelInitialization->False]],
+  DefaultBaseStyle->{
+   "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+  FormatType->TraditionalForm,
+  FrameTicks->None]], "Output",
+ CellChangeTimes->{3.7809990560470667`*^9, 
+  3.7809991250239277`*^9},ExpressionUUID->"d2eed02a-cde4-4bcc-aba1-\
+5711a62e92bb"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"MarkovProcessProperties", "[", "p1", "]"}]], "Input",
+ CellChangeTimes->{{3.780937422514069*^9, 3.7809374277450123`*^9}, 
+   3.780999085274795*^9},ExpressionUUID->"87a79418-f93d-4887-a4b0-\
+53880d8d019b"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox[
+        StyleBox["\<\"Basic Properties\"\>",
+         StripOnInput->False,
+         FontWeight->Bold], TextForm]], "InlineText",ExpressionUUID->
+       "7b0c13d7-6c82-4cd7-acc5-9ed84b525918"],
+      Text[
+       Style["Basic Properties", Bold]]], "\[SpanFromLeft]"},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"InitialProbabilities\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"5afdf147-c262-4c68-8664-9dad094d9f7e"],
+      Text["InitialProbabilities"]], 
+     GraphicsBox[
+      RasterBox[{{{1., 0.42, 0.}, {1., 1., 1.}, {1., 1., 1.}, {1., 1., 
+       1.}}}, {{0, 0}, {4, 1}}, {0, 1}],
+      Frame->True,
+      FrameLabel->{None, None},
+      FrameTicks->{{False, False}, {False, False}},
+      GridLinesStyle->Directive[
+        GrayLevel[0.5, 0.4]],
+      ImageSize->Tiny,
+      Method->{
+       "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> Automatic, 
+        "DefaultPlotStyle" -> Automatic, "DomainPadding" -> Scaled[0.02], 
+        "RangePadding" -> Scaled[0.05]}]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"TransitionMatrix\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"0fc18c96-0db5-4513-99cb-9fb5bc9590c7"],
+      Text["TransitionMatrix"]], 
+     GraphicsBox[RasterBox[CompressedData["
+1:eJxTTMoPSmVmYGBggWIQGwI+2OOiH1aJrHN/eMueAQXgFifVHFJparmHWu6k
+1D0AXttKiA==
+       "], {{0, 0}, {4, 4}}, {0, 1}],
+      Frame->True,
+      FrameLabel->{None, None},
+      FrameTicks->{{False, False}, {False, False}},
+      GridLinesStyle->Directive[
+        GrayLevel[0.5, 0.4]],
+      ImageSize->Tiny,
+      Method->{
+       "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> Automatic, 
+        "DefaultPlotStyle" -> Automatic, "DomainPadding" -> Scaled[0.02], 
+        "RangePadding" -> Scaled[0.05]}]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"HoldingTimeMean\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"e945bb12-73cf-40f5-9608-10caf7432b63"],
+      Text["HoldingTimeMean"]], 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"HoldingTimeVariance\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"5f3dde09-9ab0-4fa2-be0b-c6ca7d3d54be"],
+      Text["HoldingTimeVariance"]], 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox[
+        StyleBox["\<\"Structural Properties\"\>",
+         StripOnInput->False,
+         FontWeight->Bold], TextForm]], "InlineText",ExpressionUUID->
+       "684bef71-e51f-44cc-a5ea-a9eba8b38899"],
+      Text[
+       Style["Structural Properties", Bold]]], "\[SpanFromLeft]"},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"CommunicatingClasses\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"4f6efa0a-3a09-474c-9d0a-b7d7c4b1af8f"],
+      Text["CommunicatingClasses"]], 
+     TemplateBox[{RowBox[{"{", 
+         RowBox[{"1", ",", "2", ",", "3", ",", "4"}], "}"}]},
+      "RowDefault"]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"RecurrentClasses\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"50d14ed9-873d-4537-96e8-a89e9238e14c"],
+      Text["RecurrentClasses"]], 
+     TemplateBox[{RowBox[{"{", 
+         RowBox[{"1", ",", "2", ",", "3", ",", "4"}], "}"}]},
+      "RowDefault"]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"TransientClasses\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"2302e5f6-18d8-41b3-9486-866e6d8d7e93"],
+      Text["TransientClasses"]], "None"},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"AbsorbingClasses\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"2e00cddb-87de-45f5-a139-f7ec88020bf2"],
+      Text["AbsorbingClasses"]], "None"},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"PeriodicClasses\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"754f3a82-5047-443d-925d-9710d5b10ec1"],
+      Text["PeriodicClasses"]], 
+     TemplateBox[{RowBox[{"{", 
+         RowBox[{"1", ",", "2", ",", "3", ",", "4"}], "}"}]},
+      "RowDefault"]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"Periods\"\>", TextForm]], "InlineText",ExpressionUUID->
+       "219a0389-ea52-49f9-b5cd-c9f543695005"],
+      Text["Periods"]], 
+     RowBox[{"{", "2", "}"}]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"Irreducible\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"3e44b8d6-6f41-4bef-81fa-3d67e55d747f"],
+      Text["Irreducible"]], "True"},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"Primitive\"\>", TextForm]], "InlineText",ExpressionUUID->
+       "14d8a65c-dbb5-4662-9b1c-5186bd3de648"],
+      Text["Primitive"]], "False"},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"Aperiodic\"\>", TextForm]], "InlineText",ExpressionUUID->
+       "9828c33d-5245-4d71-a39f-95bb9fc4cfb8"],
+      Text["Aperiodic"]], "False"},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox[
+        StyleBox["\<\"Limiting Properties\"\>",
+         StripOnInput->False,
+         FontWeight->Bold], TextForm]], "InlineText",ExpressionUUID->
+       "f33a9d43-a09f-4b31-a300-6c9befaab4aa"],
+      Text[
+       Style["Limiting Properties", Bold]]], "\[SpanFromLeft]"},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"LimitTransitionMatrix\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"82c79fc7-e0ab-4631-be9c-57faacfa4037"],
+      Text["LimitTransitionMatrix"]], 
+     GraphicsBox[RasterBox[CompressedData["
+1:eJxTTMoPSmVmYGBggWIQGwI+2D+sElnn/vCWPQMKGBWntTgA6M9aiA==
+       "], {{0, 
+       0}, {4, 4}}, {0, 1}],
+      Frame->True,
+      FrameLabel->{None, None},
+      FrameTicks->{{False, False}, {False, False}},
+      GridLinesStyle->Directive[
+        GrayLevel[0.5, 0.4]],
+      ImageSize->Tiny,
+      Method->{
+       "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> Automatic, 
+        "DefaultPlotStyle" -> Automatic, "DomainPadding" -> Scaled[0.02], 
+        "RangePadding" -> Scaled[0.05]}]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"Reversible\"\>", TextForm]], "InlineText",ExpressionUUID->
+       "12111c8c-1f5b-45d5-8248-67aa2c27e858"],
+      Text["Reversible"]], "True"}
+   },
+   AutoDelete->False,
+   BaseStyle->{FontFamily -> "Times"},
+   GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
+   GridBoxBackground->{"Columns" -> {{
+        RGBColor[1., 1., 0.85]}}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+   GridBoxSpacings->{"Columns" -> {{1}}, "Rows" -> {{1}}}],
+  "Grid"]], "Output",
+ CellChangeTimes->{3.7809374293536043`*^9, 3.7809374692497*^9, 
+  3.780998663105708*^9, 
+  3.7809991250811357`*^9},ExpressionUUID->"8378d373-a6e0-4f04-87e0-\
+17b7f1ca4ece"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Stationary", " ", "probability", " ", "distribution", " ", "over", " ", 
+    "all", " ", "four", " ", "states"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"PDF", "[", 
+      RowBox[{
+       RowBox[{"StationaryDistribution", "[", "p1", "]"}], ",", "#"}], "]"}], 
+     " ", "&"}], ")"}], " ", "/@", " ", 
+   RowBox[{"Range", "[", "4", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.780937708590973*^9, 3.7809377337527323`*^9}, 
+   3.780999089858457*^9, {3.780999293524323*^9, 3.7809993381166*^9}, {
+   3.7809993890908747`*^9, 3.780999423509289*^9}, {3.7809995102782803`*^9, 
+   3.780999532862877*^9}},ExpressionUUID->"831c2050-603e-4d47-8973-\
+077376c7f07f"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   FractionBox["1", "4"], ",", 
+   FractionBox["1", "4"], ",", 
+   FractionBox["1", "4"], ",", 
+   FractionBox["1", "4"]}], "}"}]], "Output",
+ CellChangeTimes->{{3.780937726078092*^9, 3.780937734126627*^9}, 
+   3.780998663261712*^9, 3.780999125101398*^9, 3.780999339278782*^9, 
+   3.780999517535029*^9},ExpressionUUID->"0512da51-f636-452d-bf53-\
+1f8238e29bcb"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Markov chain associated to the single-bit flip mutation operator on a \
+three-dimensional binary Hamming graph\
+\>", "Section",
+ CellChangeTimes->{{3.780998707187126*^9, 3.7809989085654984`*^9}, {
+  3.780998960321219*^9, 3.780998961488813*^9}, {3.780999592426453*^9, 
+  3.780999593777318*^9}, {3.781000410863818*^9, 
+  3.7810004109286537`*^9}},ExpressionUUID->"2a3159e3-afab-418e-83dd-\
+275e7a44c503"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"hyp32", "=", 
+   RowBox[{"HypercubeGraph", "[", "3", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"hyp32Adj", "=", 
+   RowBox[{"AdjacencyMatrix", "[", "hyp32", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"hyp32Diag", "=", 
+   RowBox[{"DiagonalMatrix", "[", 
+    RowBox[{"VertexDegree", "[", "hyp32", "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"hyp32Trans", "=", 
+   RowBox[{"hyp32Adj", ".", 
+    RowBox[{"Inverse", "[", "hyp32Diag", "]"}]}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.780937866369132*^9, 
+  3.780937905713602*^9}},ExpressionUUID->"c827019c-7b78-47ba-8bc6-\
+529524e9c89a"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["hyp32"], "Input",
+ CellChangeTimes->{{3.780937934927629*^9, 3.78093793631271*^9}, {
+  3.780999714852417*^9, 
+  3.78099971665469*^9}},ExpressionUUID->"5600c55a-3c98-4053-a539-\
+906fcdc735d7"],
+
+Cell[BoxData[
+ GraphicsBox[
+  NamespaceBox["NetworkGraphics",
+   DynamicModuleBox[{Typeset`graph = HoldComplete[
+     Graph[{1, 2, 3, 4, 5, 6, 7, 8}, {Null, 
+       SparseArray[
+       Automatic, {8, 8}, 0, {
+        1, {{0, 3, 6, 9, 12, 15, 18, 21, 24}, {{2}, {3}, {5}, {1}, {4}, {6}, {
+          1}, {4}, {7}, {2}, {3}, {8}, {1}, {6}, {7}, {2}, {5}, {8}, {3}, {
+          5}, {8}, {4}, {6}, {7}}}, Pattern}]}]]}, 
+    TagBox[
+     GraphicsGroupBox[
+      GraphicsComplexBox[{{0.6411318907234969, 1.6256350616332038`}, {
+       1.5431761475992014`, 1.6258514889129208`}, {1.3641521541128723`, 
+       0.8124188351574709}, {2.186420636755495, 0.814439144539747}, {0., 
+       0.8116524116085829}, {0.8207122623609914, 0.8136876580070856}, {
+       0.6431241846256299, 0.}, {1.5449243126722068`, 
+       0.0005338415834358345}}, {
+        {Hue[0.6, 0.7, 0.5], Opacity[0.7], 
+         {Arrowheads[0.], ArrowBox[{1, 2}, 0.02410631722965237]}, 
+         {Arrowheads[0.], ArrowBox[{1, 3}, 0.02410631722965237]}, 
+         {Arrowheads[0.], ArrowBox[{1, 5}, 0.02410631722965237]}, 
+         {Arrowheads[0.], ArrowBox[{2, 4}, 0.02410631722965237]}, 
+         {Arrowheads[0.], ArrowBox[{2, 6}, 0.02410631722965237]}, 
+         {Arrowheads[0.], ArrowBox[{3, 4}, 0.02410631722965237]}, 
+         {Arrowheads[0.], ArrowBox[{3, 7}, 0.02410631722965237]}, 
+         {Arrowheads[0.], ArrowBox[{4, 8}, 0.02410631722965237]}, 
+         {Arrowheads[0.], ArrowBox[{5, 6}, 0.02410631722965237]}, 
+         {Arrowheads[0.], ArrowBox[{5, 7}, 0.02410631722965237]}, 
+         {Arrowheads[0.], ArrowBox[{6, 8}, 0.02410631722965237]}, 
+         {Arrowheads[0.], ArrowBox[{7, 8}, 0.02410631722965237]}}, 
+        {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+         DiskBox[1, 0.02410631722965237], DiskBox[2, 0.02410631722965237], 
+         DiskBox[3, 0.02410631722965237], DiskBox[4, 0.02410631722965237], 
+         DiskBox[5, 0.02410631722965237], DiskBox[6, 0.02410631722965237], 
+         DiskBox[7, 0.02410631722965237], DiskBox[8, 0.02410631722965237]}}]],
+     
+     MouseAppearanceTag["NetworkGraphics"]],
+    AllowKernelInitialization->False]],
+  DefaultBaseStyle->{
+   "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+  FormatType->TraditionalForm,
+  FrameTicks->None]], "Output",
+ CellChangeTimes->{
+  3.780999718635071*^9},ExpressionUUID->"b90e2c4b-9c17-45f2-a958-\
+8cd97fbeba19"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"hyp32Trans", "//", "MatrixForm"}]], "Input",
+ CellChangeTimes->{{3.780999724546977*^9, 
+  3.78099973134485*^9}},ExpressionUUID->"bf114bd9-761f-4e2f-a5cd-\
+e74a534d83b4"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"0", 
+      FractionBox["1", "3"], 
+      FractionBox["1", "3"], "0", 
+      FractionBox["1", "3"], "0", "0", "0"},
+     {
+      FractionBox["1", "3"], "0", "0", 
+      FractionBox["1", "3"], "0", 
+      FractionBox["1", "3"], "0", "0"},
+     {
+      FractionBox["1", "3"], "0", "0", 
+      FractionBox["1", "3"], "0", "0", 
+      FractionBox["1", "3"], "0"},
+     {"0", 
+      FractionBox["1", "3"], 
+      FractionBox["1", "3"], "0", "0", "0", "0", 
+      FractionBox["1", "3"]},
+     {
+      FractionBox["1", "3"], "0", "0", "0", "0", 
+      FractionBox["1", "3"], 
+      FractionBox["1", "3"], "0"},
+     {"0", 
+      FractionBox["1", "3"], "0", "0", 
+      FractionBox["1", "3"], "0", "0", 
+      FractionBox["1", "3"]},
+     {"0", "0", 
+      FractionBox["1", "3"], "0", 
+      FractionBox["1", "3"], "0", "0", 
+      FractionBox["1", "3"]},
+     {"0", "0", "0", 
+      FractionBox["1", "3"], "0", 
+      FractionBox["1", "3"], 
+      FractionBox["1", "3"], "0"}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.7809997318029203`*^9},ExpressionUUID->"5ed821b6-1c92-4fdc-b08e-\
+12bfecdb85c3"]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"start2", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "1", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+     "0"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"p2", "=", 
+   RowBox[{"DiscreteMarkovProcess", "[", 
+    RowBox[{"start2", ",", "hyp32Trans"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.78093791296548*^9, 3.780937967791526*^9}, {
+  3.780938127075688*^9, 3.7809381724347353`*^9}, {3.7809998354265738`*^9, 
+  3.780999838110293*^9}},ExpressionUUID->"e47f3d6b-6855-49a5-a505-\
+b177244e5c61"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Graph", "[", "p2", "]"}]], "Input",ExpressionUUID->"5a86335e-754f-403f-bf78-26b09efba68a"],
+
+Cell[BoxData[
+ GraphicsBox[
+  NamespaceBox["NetworkGraphics",
+   DynamicModuleBox[{Typeset`graph = HoldComplete[
+     Graph[{1, 2, 3, 4, 5, 6, 7, 8}, {
+       SparseArray[
+       Automatic, {8, 8}, 0, {
+        1, {{0, 3, 6, 9, 12, 15, 18, 21, 24}, {{2}, {3}, {5}, {1}, {4}, {6}, {
+          1}, {4}, {7}, {2}, {3}, {8}, {1}, {6}, {7}, {2}, {5}, {8}, {3}, {
+          5}, {8}, {4}, {6}, {7}}}, Pattern}], Null}, {
+      EdgeLabels -> {DirectedEdge[1, 3] -> Placed[
+           Rational[1, 3], Tooltip], DirectedEdge[5, 7] -> Placed[
+           Rational[1, 3], Tooltip], DirectedEdge[8, 4] -> Placed[
+           Rational[1, 3], Tooltip], DirectedEdge[4, 3] -> Placed[
+           Rational[1, 3], Tooltip], DirectedEdge[2, 6] -> Placed[
+           Rational[1, 3], Tooltip], DirectedEdge[3, 1] -> Placed[
+           Rational[1, 3], Tooltip], DirectedEdge[6, 2] -> Placed[
+           Rational[1, 3], Tooltip], DirectedEdge[7, 8] -> Placed[
+           Rational[1, 3], Tooltip], DirectedEdge[8, 7] -> Placed[
+           Rational[1, 3], Tooltip], DirectedEdge[3, 4] -> Placed[
+           Rational[1, 3], Tooltip], DirectedEdge[1, 2] -> Placed[
+           Rational[1, 3], Tooltip], DirectedEdge[5, 1] -> Placed[
+           Rational[1, 3], Tooltip], DirectedEdge[6, 5] -> Placed[
+           Rational[1, 3], Tooltip], DirectedEdge[4, 8] -> Placed[
+           Rational[1, 3], Tooltip], DirectedEdge[3, 7] -> Placed[
+           Rational[1, 3], Tooltip], DirectedEdge[1, 5] -> Placed[
+           Rational[1, 3], Tooltip], DirectedEdge[7, 3] -> Placed[
+           Rational[1, 3], Tooltip], DirectedEdge[2, 4] -> Placed[
+           Rational[1, 3], Tooltip], DirectedEdge[2, 1] -> Placed[
+           Rational[1, 3], Tooltip], DirectedEdge[5, 6] -> Placed[
+           Rational[1, 3], Tooltip], DirectedEdge[7, 5] -> Placed[
+           Rational[1, 3], Tooltip], DirectedEdge[6, 8] -> Placed[
+           Rational[1, 3], Tooltip], DirectedEdge[4, 2] -> Placed[
+           Rational[1, 3], Tooltip], DirectedEdge[8, 6] -> Placed[
+           Rational[1, 3], Tooltip]}, EdgeStyle -> {
+         Arrowheads[Medium]}, GraphLayout -> "SpringElectricalEmbedding", 
+       ImagePadding -> All, 
+       Properties -> {
+        DirectedEdge[3, 4] -> {"Probability" -> Rational[1, 3]}, 
+         DirectedEdge[1, 2] -> {"Probability" -> Rational[1, 3]}, 
+         DirectedEdge[3, 7] -> {"Probability" -> Rational[1, 3]}, 
+         DirectedEdge[5, 1] -> {"Probability" -> Rational[1, 3]}, 
+         DirectedEdge[6, 8] -> {"Probability" -> Rational[1, 3]}, 
+         DirectedEdge[8, 6] -> {"Probability" -> Rational[1, 3]}, 
+         DirectedEdge[4, 8] -> {"Probability" -> Rational[1, 3]}, 
+         DirectedEdge[2, 6] -> {"Probability" -> Rational[1, 3]}, 
+         DirectedEdge[5, 7] -> {"Probability" -> Rational[1, 3]}, 
+         DirectedEdge[4, 3] -> {"Probability" -> Rational[1, 3]}, 
+         DirectedEdge[7, 3] -> {"Probability" -> Rational[1, 3]}, 
+         DirectedEdge[7, 8] -> {"Probability" -> Rational[1, 3]}, 
+         DirectedEdge[6, 2] -> {"Probability" -> Rational[1, 3]}, 
+         DirectedEdge[6, 5] -> {"Probability" -> Rational[1, 3]}, 
+         DirectedEdge[1, 3] -> {"Probability" -> Rational[1, 3]}, 
+         DirectedEdge[2, 4] -> {"Probability" -> Rational[1, 3]}, 
+         DirectedEdge[7, 5] -> {"Probability" -> Rational[1, 3]}, 
+         DirectedEdge[8, 4] -> {"Probability" -> Rational[1, 3]}, 
+         DirectedEdge[4, 2] -> {"Probability" -> Rational[1, 3]}, 
+         DirectedEdge[3, 1] -> {"Probability" -> Rational[1, 3]}, 
+         DirectedEdge[5, 6] -> {"Probability" -> Rational[1, 3]}, 
+         DirectedEdge[8, 7] -> {"Probability" -> Rational[1, 3]}, 
+         DirectedEdge[1, 5] -> {"Probability" -> Rational[1, 3]}, 
+         DirectedEdge[2, 1] -> {"Probability" -> Rational[1, 3]}}, 
+       VertexLabels -> {
+         Placed["Name", Center]}, 
+       VertexShapeFunction -> {
+        2 -> "Circle", 3 -> "Circle", 4 -> "Circle", 8 -> "Circle", 7 -> 
+         "Circle", 6 -> "Circle", 5 -> "Circle", 1 -> "Circle"}, 
+       VertexSize -> {0.27}, 
+       VertexStyle -> {
+        5 -> Hue[0.14, 1, 0.9], 6 -> Hue[0.14, 1, 0.9], 2 -> 
+         Hue[0.14, 1, 0.9], 7 -> Hue[0.14, 1, 0.9], 8 -> Hue[0.14, 1, 0.9], 1 -> 
+         Hue[0.14, 1, 0.9], 3 -> Hue[0.14, 1, 0.9], 4 -> 
+         Hue[0.14, 1, 0.9]}}]]}, 
+    TagBox[GraphicsGroupBox[{
+       {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.6411318907234969, 
+           1.6256350616332038`}, {1.0921184296977657`, 1.7740761068684268`}, {
+           1.5431761475992014`, 1.6258514889129208`}}], 0.0733645853513476],
+          FractionBox["1", "3"]],
+         Annotation[#, 
+          Rational[1, 3], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.6411318907234969, 
+           1.6256350616332038`}, {1.1363679063212901`, 1.3379209407351365`}, {
+           1.3641521541128723`, 0.8124188351574709}}], 0.0733645853513476],
+          FractionBox["1", "3"]],
+         Annotation[#, 
+          Rational[1, 3], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.6411318907234969, 
+           1.6256350616332038`}, {0.4544178605258927, 1.1132155294669495`}, {
+           0., 0.8116524116085829}}], 0.0733645853513476],
+          FractionBox["1", "3"]],
+         Annotation[#, 
+          Rational[1, 3], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.5431761475992014`, 
+           1.6258514889129208`}, {1.0921896086249456`, 1.4774104436805715`}, {
+           0.6411318907234969, 1.6256350616332038`}}], 0.0733645853513476],
+          FractionBox["1", "3"]],
+         Annotation[#, 
+          Rational[1, 3], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.5431761475992014`, 
+           1.6258514889129208`}, {1.9982276443596765`, 1.325920921144093}, {
+           2.186420636755495, 0.814439144539747}}], 0.0733645853513476],
+          FractionBox["1", "3"]],
+         Annotation[#, 
+          Rational[1, 3], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.5431761475992014`, 
+           1.6258514889129208`}, {1.315497032169356, 1.1009670723580218`}, {
+           0.8207122623609914, 0.8136876580070856}}], 0.0733645853513476],
+          FractionBox["1", "3"]],
+         Annotation[#, 
+          Rational[1, 3], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.3641521541128723`, 
+           0.8124188351574709}, {0.8689161385150804, 1.1001329560549895`}, {
+           0.6411318907234969, 1.6256350616332038`}}], 0.0733645853513476],
+          FractionBox["1", "3"]],
+         Annotation[#, 
+          Rational[1, 3], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.3641521541128723`, 
+           0.8124188351574709}, {1.7749541742498205`, 0.9486434335199154}, {
+           2.186420636755495, 0.814439144539747}}], 0.0733645853513476],
+          FractionBox["1", "3"]],
+         Annotation[#, 
+          Rational[1, 3], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.3641521541128723`, 
+           0.8124188351574709}, {1.1372329296481831`, 0.28764303953629733`}, {
+           0.6431241846256299, 0.}}], 0.0733645853513476],
+          FractionBox["1", "3"]],
+         Annotation[#, 
+          Rational[1, 3], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{2.186420636755495, 0.814439144539747}, {
+           1.7313691399950122`, 1.1143697123080953`}, {1.5431761475992014`, 
+           1.6258514889129208`}}], 0.0733645853513476],
+          FractionBox["1", "3"]],
+         Annotation[#, 
+          Rational[1, 3], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{2.186420636755495, 0.814439144539747}, {
+           1.7756186166185473`, 0.6782145461779915}, {1.3641521541128723`, 
+           0.8124188351574709}}], 0.0733645853513476],
+          FractionBox["1", "3"]],
+         Annotation[#, 
+          Rational[1, 3], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{2.186420636755495, 0.814439144539747}, {
+           1.99951167086829, 0.3019983582142104}, {1.5449243126722068`, 
+           0.0005338415834358345}}], 0.0733645853513476],
+          FractionBox["1", "3"]],
+         Annotation[#, 
+          Rational[1, 3], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0., 0.8116524116085829}, {
+           0.1867140301976064, 1.3240719437740556`}, {0.6411318907234969, 
+           1.6256350616332038`}}], 0.0733645853513476],
+          FractionBox["1", "3"]],
+         Annotation[#, 
+          Rational[1, 3], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0., 0.8116524116085829}, {
+           0.41002145374202237`, 0.9476285724531319}, {0.8207122623609914, 
+           0.8136876580070856}}], 0.0733645853513476],
+          FractionBox["1", "3"]],
+         Annotation[#, 
+          Rational[1, 3], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0., 0.8116524116085829}, {
+           0.45503082133070777`, 0.5115820272556916}, {0.6431241846256299, 
+           0.}}], 0.0733645853513476],
+          FractionBox["1", "3"]],
+         Annotation[#, 
+          Rational[1, 3], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.8207122623609914, 0.8136876580070856}, {
+           1.0483913777908427`, 1.3385720745620422`}, {1.5431761475992014`, 
+           1.6258514889129208`}}], 0.0733645853513476],
+          FractionBox["1", "3"]],
+         Annotation[#, 
+          Rational[1, 3], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.8207122623609914, 0.8136876580070856}, {
+           0.41069080861897395`, 0.6777114971627209}, {0., 
+           0.8116524116085829}}], 0.0733645853513476],
+          FractionBox["1", "3"]],
+         Annotation[#, 
+          Rational[1, 3], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.8207122623609914, 0.8136876580070856}, {
+           1.3165339086641052`, 0.5262007204675797}, {1.5449243126722068`, 
+           0.0005338415834358345}}], 0.0733645853513476],
+          FractionBox["1", "3"]],
+         Annotation[#, 
+          Rational[1, 3], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.6431241846256299, 0.}, {
+           0.8700434090903149, 0.5247757956210912}, {1.3641521541128723`, 
+           0.8124188351574709}}], 0.0733645853513476],
+          FractionBox["1", "3"]],
+         Annotation[#, 
+          Rational[1, 3], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.6431241846256299, 0.}, {
+           0.1880933632949212, 0.3000703843529148}, {0., 
+           0.8116524116085829}}], 0.0733645853513476],
+          FractionBox["1", "3"]],
+         Annotation[#, 
+          Rational[1, 3], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.6431241846256299, 0.}, {
+           1.0939364633400612`, 0.14855960765752887`}, {1.5449243126722068`, 
+           0.0005338415834358345}}], 0.0733645853513476],
+          FractionBox["1", "3"]],
+         Annotation[#, 
+          Rational[1, 3], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.5449243126722068`, 
+           0.0005338415834358345}, {1.7318332785594155`, 
+           0.5129746279091189}, {2.186420636755495, 0.814439144539747}}], 
+           0.0733645853513476],
+          FractionBox["1", "3"]],
+         Annotation[#, 
+          Rational[1, 3], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.5449243126722068`, 
+           0.0005338415834358345}, {1.0491026663690928`, 
+           0.2880207791230327}, {0.8207122623609914, 0.8136876580070856}}], 
+           0.0733645853513476],
+          FractionBox["1", "3"]],
+         Annotation[#, 
+          Rational[1, 3], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.5449243126722068`, 
+           0.0005338415834358345}, {
+           1.0941120339577763`, -0.14802576607409215`}, {0.6431241846256299, 
+           0.}}], 0.0733645853513476],
+          FractionBox["1", "3"]],
+         Annotation[#, 
+          Rational[1, 3], "Tooltip"]& ]}, 
+       {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], {
+         {Hue[0.14, 1, 0.9], 
+          DiskBox[{0.6411318907234969, 1.6256350616332038}, 
+           0.0733645853513476]}, 
+         InsetBox["1", {0.6411318907234969, 1.6256350616332038},
+          BaseStyle->"Graphics"]}, {
+         {Hue[0.14, 1, 0.9], 
+          DiskBox[{1.5431761475992014, 1.6258514889129208}, 
+           0.0733645853513476]}, 
+         InsetBox["2", {1.5431761475992014, 1.6258514889129208},
+          BaseStyle->"Graphics"]}, {
+         {Hue[0.14, 1, 0.9], 
+          DiskBox[{1.3641521541128723, 0.8124188351574709}, 
+           0.0733645853513476]}, 
+         InsetBox["3", {1.3641521541128723, 0.8124188351574709},
+          BaseStyle->"Graphics"]}, {
+         {Hue[0.14, 1, 0.9], 
+          DiskBox[{2.186420636755495, 0.814439144539747}, 
+           0.0733645853513476]}, 
+         InsetBox["4", {2.186420636755495, 0.814439144539747},
+          BaseStyle->"Graphics"]}, {
+         {Hue[0.14, 1, 0.9], 
+          DiskBox[{0., 0.8116524116085829}, 0.0733645853513476]}, 
+         InsetBox["5", {0., 0.8116524116085829},
+          BaseStyle->"Graphics"]}, {
+         {Hue[0.14, 1, 0.9], 
+          DiskBox[{0.8207122623609914, 0.8136876580070856}, 
+           0.0733645853513476]}, 
+         InsetBox["6", {0.8207122623609914, 0.8136876580070856},
+          BaseStyle->"Graphics"]}, {
+         {Hue[0.14, 1, 0.9], 
+          DiskBox[{0.6431241846256299, 0.}, 0.0733645853513476]}, 
+         InsetBox["7", {0.6431241846256299, 0.},
+          BaseStyle->"Graphics"]}, {
+         {Hue[0.14, 1, 0.9], 
+          DiskBox[{1.5449243126722068, 0.0005338415834358345}, 
+           0.0733645853513476]}, 
+         InsetBox["8", {1.5449243126722068, 0.0005338415834358345},
+          BaseStyle->"Graphics"]}}}],
+     MouseAppearanceTag["NetworkGraphics"]],
+    AllowKernelInitialization->False]],
+  DefaultBaseStyle->{
+   "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+  FormatType->TraditionalForm,
+  FrameTicks->None]], "Output",
+ CellChangeTimes->{
+  3.780999850891436*^9},ExpressionUUID->"ec24c904-4330-421a-a36f-\
+0fa58e344ca2"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"MarkovProcessProperties", "[", "p2", "]"}]], "Input",
+ CellChangeTimes->{{3.780999872016253*^9, 
+  3.7809998769828663`*^9}},ExpressionUUID->"334e7fe7-b62b-405f-b314-\
+dd9040c54d8b"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox[
+        StyleBox["\<\"Basic Properties\"\>",
+         StripOnInput->False,
+         FontWeight->Bold], TextForm]], "InlineText",ExpressionUUID->
+       "c7d67b4a-7934-49ea-a77a-beb3c78396d2"],
+      Text[
+       Style["Basic Properties", Bold]]], "\[SpanFromLeft]"},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"InitialProbabilities\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"61a49126-2e3d-45e5-a397-fb61b769a5d4"],
+      Text["InitialProbabilities"]], 
+     GraphicsBox[
+      RasterBox[{{{1., 0.42, 0.}, {1., 1., 1.}, {1., 1., 1.}, {1., 1., 1.}, {
+       1., 1., 1.}, {1., 1., 1.}, {1., 1., 1.}, {1., 1., 1.}}}, {{0, 0}, {8, 
+       1}}, {0, 1}],
+      Frame->True,
+      FrameLabel->{None, None},
+      FrameTicks->{{False, False}, {False, False}},
+      GridLinesStyle->Directive[
+        GrayLevel[0.5, 0.4]],
+      ImageSize->Tiny,
+      Method->{
+       "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> Automatic, 
+        "DefaultPlotStyle" -> Automatic, "DomainPadding" -> Scaled[0.02], 
+        "RangePadding" -> Scaled[0.05]}]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"TransitionMatrix\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"24b7774d-cb59-4532-834f-28131e29ed94"],
+      Text["TransitionMatrix"]], 
+     GraphicsBox[RasterBox[CompressedData["
+1:eJxTTMoPSmVmYGDggGIQGwI+2FOLflglss794S17BhRAunpSzRkodw5Xe0k1
+h9bxNVDuGfUvfcwZ6vaSav5gcScANwAVDw==
+       "], {{0, 0}, {8, 8}}, {0, 1}],
+      Frame->True,
+      FrameLabel->{None, None},
+      FrameTicks->{{False, False}, {False, False}},
+      GridLinesStyle->Directive[
+        GrayLevel[0.5, 0.4]],
+      ImageSize->Tiny,
+      Method->{
+       "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> Automatic, 
+        "DefaultPlotStyle" -> Automatic, "DomainPadding" -> Scaled[0.02], 
+        "RangePadding" -> Scaled[0.05]}]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"HoldingTimeMean\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"4fc95751-6dd2-48f2-945d-e022a38b7e6b"],
+      Text["HoldingTimeMean"]], 
+     GraphicsBox[
+      RasterBox[{{{1., 0.42, 0.}, {1., 0.42, 0.}, {1., 0.42, 0.}, {1., 0.42, 
+       0.}, {1., 0.42, 0.}, {1., 0.42, 0.}, {1., 0.42, 0.}, {1., 0.42, 
+       0.}}}, {{0, 0}, {8, 1}}, {0, 1}],
+      Frame->True,
+      FrameLabel->{None, None},
+      FrameTicks->{{False, False}, {False, False}},
+      GridLinesStyle->Directive[
+        GrayLevel[0.5, 0.4]],
+      ImageSize->Tiny,
+      Method->{
+       "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> Automatic, 
+        "DefaultPlotStyle" -> Automatic, "DomainPadding" -> Scaled[0.02], 
+        "RangePadding" -> Scaled[0.05]}]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"HoldingTimeVariance\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"e7806adf-70be-493b-9b4f-45600f825b66"],
+      Text["HoldingTimeVariance"]], 
+     GraphicsBox[
+      RasterBox[SparseArray[Automatic, {1, 8}, 1., {1, {{0, 0}, {}}, {}}], {{
+       0, 0}, {8, 1}}, {0, 1}],
+      Frame->True,
+      FrameLabel->{None, None},
+      FrameTicks->{{False, False}, {False, False}},
+      GridLinesStyle->Directive[
+        GrayLevel[0.5, 0.4]],
+      ImageSize->Tiny,
+      Method->{
+       "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> Automatic, 
+        "DefaultPlotStyle" -> Automatic, "DomainPadding" -> Scaled[0.02], 
+        "RangePadding" -> Scaled[0.05]}]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox[
+        StyleBox["\<\"Structural Properties\"\>",
+         StripOnInput->False,
+         FontWeight->Bold], TextForm]], "InlineText",ExpressionUUID->
+       "a27cebb2-f211-4d0a-a5ac-edfc5a582728"],
+      Text[
+       Style["Structural Properties", Bold]]], "\[SpanFromLeft]"},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"CommunicatingClasses\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"67739f07-d214-4241-aa50-2274103149de"],
+      Text["CommunicatingClasses"]], 
+     TemplateBox[{RowBox[{"{", 
+         RowBox[{"1", ",", "\"\[Ellipsis]\"", ",", "8"}], "}"}]},
+      "RowDefault"]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"RecurrentClasses\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"4be6bb8b-7da8-42b0-ac21-9f1a9478e935"],
+      Text["RecurrentClasses"]], 
+     TemplateBox[{RowBox[{"{", 
+         RowBox[{"1", ",", "\"\[Ellipsis]\"", ",", "8"}], "}"}]},
+      "RowDefault"]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"TransientClasses\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"fd061798-5156-42cc-bea3-f0f0cbcf2f36"],
+      Text["TransientClasses"]], "None"},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"AbsorbingClasses\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"b0bfd8c8-5ba2-49ed-9338-e31c60aa1c17"],
+      Text["AbsorbingClasses"]], "None"},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"PeriodicClasses\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"f63bb571-6dda-4370-aab7-e8e23f633270"],
+      Text["PeriodicClasses"]], 
+     TemplateBox[{RowBox[{"{", 
+         RowBox[{"1", ",", "\"\[Ellipsis]\"", ",", "8"}], "}"}]},
+      "RowDefault"]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"Periods\"\>", TextForm]], "InlineText",ExpressionUUID->
+       "9249d1c6-8ab1-445c-bed9-0315f93ed45c"],
+      Text["Periods"]], 
+     RowBox[{"{", "2", "}"}]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"Irreducible\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"7f746302-600d-4c33-b5c3-b0ee6a997e23"],
+      Text["Irreducible"]], "True"},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"Aperiodic\"\>", TextForm]], "InlineText",ExpressionUUID->
+       "af8351d6-ce0a-4dc2-85fb-1cdf516e0e80"],
+      Text["Aperiodic"]], "False"},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"Primitive\"\>", TextForm]], "InlineText",ExpressionUUID->
+       "8fd3e5c5-bdc9-4cdc-a59b-14c350e440e0"],
+      Text["Primitive"]], "False"},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox[
+        StyleBox["\<\"Limiting Properties\"\>",
+         StripOnInput->False,
+         FontWeight->Bold], TextForm]], "InlineText",ExpressionUUID->
+       "c6547a51-42ca-411f-a0d5-cf8834ce95b1"],
+      Text[
+       Style["Limiting Properties", Bold]]], "\[SpanFromLeft]"},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"LimitTransitionMatrix\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"829f31a9-f1bf-438a-af53-d4476c6cd60a"],
+      Text["LimitTransitionMatrix"]], 
+     GraphicsBox[RasterBox[CompressedData["
+1:eJxTTMoPSmVmYGDggGIQGwI+2D+sElnn/vCWPQMKGBUfFR8VHxUfFR+u4gDz
+bmUP
+       "], {{0, 0}, {8, 8}}, {0, 1}],
+      Frame->True,
+      FrameLabel->{None, None},
+      FrameTicks->{{False, False}, {False, False}},
+      GridLinesStyle->Directive[
+        GrayLevel[0.5, 0.4]],
+      ImageSize->Tiny,
+      Method->{
+       "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> Automatic, 
+        "DefaultPlotStyle" -> Automatic, "DomainPadding" -> Scaled[0.02], 
+        "RangePadding" -> Scaled[0.05]}]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"Reversible\"\>", TextForm]], "InlineText",ExpressionUUID->
+       "39356449-fe33-4be5-a7a2-ab6a04e840bb"],
+      Text["Reversible"]], "True"}
+   },
+   AutoDelete->False,
+   BaseStyle->{FontFamily -> "Times"},
+   GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
+   GridBoxBackground->{"Columns" -> {{
+        RGBColor[1., 1., 0.85]}}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+   GridBoxSpacings->{"Columns" -> {{1}}, "Rows" -> {{1}}}],
+  "Grid"]], "Output",
+ CellChangeTimes->{
+  3.780999879070301*^9},ExpressionUUID->"3c36f258-1ee1-4aa5-a0b3-\
+ff06da2df43e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"PDF", "[", 
+     RowBox[{
+      RowBox[{"StationaryDistribution", "[", "p2", "]"}], ",", "#"}], "]"}], 
+    " ", "&"}], ")"}], " ", "/@", " ", 
+  RowBox[{"Range", "[", "8", "]"}]}]], "Input",
+ CellChangeTimes->{{3.780999935274972*^9, 
+  3.780999963079707*^9}},ExpressionUUID->"5ab6ec82-c7d5-4591-988a-\
+f73276af70ef"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   FractionBox["1", "8"], ",", 
+   FractionBox["1", "8"], ",", 
+   FractionBox["1", "8"], ",", 
+   FractionBox["1", "8"], ",", 
+   FractionBox["1", "8"], ",", 
+   FractionBox["1", "8"], ",", 
+   FractionBox["1", "8"], ",", 
+   FractionBox["1", "8"]}], "}"}]], "Output",
+ CellChangeTimes->{{3.780999952550913*^9, 
+  3.7809999655563517`*^9}},ExpressionUUID->"d7b39861-9c7b-4d8d-9062-\
+66474ced5258"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Markov chain associated to the uniform crossover operator on a \
+three-dimensional binary Hamming graph\
+\>", "Section",
+ CellChangeTimes->{{3.780998707187126*^9, 3.7809989085654984`*^9}, {
+  3.780998960321219*^9, 3.780998961488813*^9}, {3.780999592426453*^9, 
+  3.780999593777318*^9}, {3.781000215101124*^9, 3.781000218067553*^9}, {
+  3.781000402120249*^9, 
+  3.781000402255023*^9}},ExpressionUUID->"7dfbdd33-6eae-47f3-bdf9-\
+199ae3493a92"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Uniform crossover operator for Boolean spaces with \
+Hamming distance",
+ FontFamily->"Latin Modern Roman"]], "Subsection",
+ CellChangeTimes->{{3.7260466172880507`*^9, 3.7260466630164003`*^9}, {
+  3.726048489769747*^9, 3.726048492225461*^9}, {3.781000610949655*^9, 
+  3.781000612087232*^9}},ExpressionUUID->"9a249a50-27a1-44c3-ab8f-\
+a1ad538aa4ae"],
+
+Cell[TextData[StyleBox["Each binary crossover operator can be defined in \
+terms of a binary 'mask', indicating for each bit position of the 'offspring' \
+whether the value at that position is taken from the 'father' or the \
+'mother'. The uniform crossover operator neighbourhood is defined by all \
+possible masks applied to the parents.",
+ FontFamily->"Latin Modern Roman"]], "Text",
+ CellChangeTimes->{{3.7260475591527042`*^9, 3.726047560072856*^9}, {
+  3.728459500352386*^9, 3.728459503391445*^9}, {3.7284595571124077`*^9, 
+  3.728459638976615*^9}, {3.728459671368443*^9, 3.7284597263845654`*^9}, {
+  3.728459758520524*^9, 3.728459899264945*^9}, {3.7284601266647463`*^9, 
+  3.72846012669695*^9}, {3.728464095924844*^9, 3.728464095926868*^9}, {
+  3.7284657921974707`*^9, 3.728465792200918*^9}, {3.7284661723475933`*^9, 
+  3.728466172350266*^9}, {3.7810002743583508`*^9, 
+  3.781000275193989*^9}},ExpressionUUID->"47762b1b-195e-4f07-8bb4-\
+addb626cb2dc"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"masks", "[", "dim_", "]"}], ":=", 
+   RowBox[{"Tuples", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1"}], "}"}], ",", "dim"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"crossoverMasked", "[", 
+    RowBox[{"father_", ",", "mother_", ",", "mask_", ",", "dim_"}], "]"}], ":=",
+    "\[IndentingNewLine]", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"mask", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], "\[Equal]", "0"}], ",", 
+       "\[IndentingNewLine]", "\t\t\t", 
+       RowBox[{"father", "[", 
+        RowBox[{"[", "i", "]"}], "]"}], ",", "\[IndentingNewLine]", "\t\t\t", 
+       
+       RowBox[{"mother", "[", 
+        RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", "\[IndentingNewLine]", 
+     "\t ", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "dim"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"unifCrossoverNeigh", "[", 
+    RowBox[{"father_", ",", "mother_", ",", "dim_"}], "]"}], ":=", " ", 
+   RowBox[{"DeleteDuplicates", "[", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"crossoverMasked", "[", 
+         RowBox[{"father", ",", "mother", ",", "#", ",", "dim"}], "]"}], 
+        ")"}], "&"}], ")"}], "/@", 
+     RowBox[{"masks", "[", "dim", "]"}]}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.726047855037455*^9, 3.7260478550442667`*^9}, {
+  3.7260482346030207`*^9, 3.726048267988949*^9}, {3.726048959442625*^9, 
+  3.726048959874652*^9}},ExpressionUUID->"71996447-c7f6-412b-a69d-\
+0a6562fce437"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Generalised adjacency matrix and transition matrix \
+for the uniform crossover",
+ FontFamily->"Latin Modern Roman"]], "Subsection",
+ CellChangeTimes->{{3.7260466172880507`*^9, 3.7260466630164003`*^9}, {
+  3.726048489769747*^9, 3.726048492225461*^9}, {3.7810003739946423`*^9, 
+  3.781000380583971*^9}, {3.78100043165911*^9, 3.781000498372801*^9}, {
+  3.781000604213518*^9, 3.781000604729333*^9}, {3.781000646521387*^9, 
+  3.7810006582776814`*^9}},ExpressionUUID->"e2b87113-a775-4ae6-90af-\
+a1fb269e9ce9"],
+
+Cell["\<\
+See (Stadler and Wagner, 1998, Algebraic Theory of Recombination Spaces) for \
+the formal definitions.\
+\>", "Text",
+ CellChangeTimes->{{3.781000539299994*^9, 3.781000588605496*^9}, 
+   3.7810012645503883`*^9},ExpressionUUID->"9ce6e6a6-e17f-4507-996f-\
+37f1b1b4ab60"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"unifCrossoverSmatrix", "[", "dim_", "]"}], ":=", " ", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"2", "*", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"3", "/", "2"}], ")"}], "^", "dim"}], ")"}], "*", 
+      RowBox[{"(", 
+       RowBox[{"3", "^", 
+        RowBox[{"(", 
+         RowBox[{"-", 
+          RowBox[{"HammingDistance", "[", 
+           RowBox[{"x", ",", "y"}], "]"}]}], ")"}]}], ")"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       RowBox[{"masks", "[", "dim", "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"y", ",", 
+       RowBox[{"masks", "[", "dim", "]"}]}], "}"}]}], "]"}]}], ";"}]], "Input",\
+
+ CellChangeTimes->{{3.726048553832251*^9, 3.726048553839839*^9}, {
+  3.726048784076108*^9, 
+  3.7260487883298388`*^9}},ExpressionUUID->"73ea53be-f3ba-42c2-9f55-\
+36acbdd8b7f9"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"Transition", " ", "matrix", " ", "T"}], " ", "=", " ", 
+    RowBox[{
+     RowBox[{
+      FractionBox["1", 
+       RowBox[{"2", "|", "X", "|"}]], " ", 
+      RowBox[{"S", ".", " ", "For"}], " ", "the", " ", "three"}], "-", 
+     RowBox[{
+     "dimensional", " ", "binary", " ", "Hamming", " ", "graph", " ", 
+      RowBox[{"\[LeftBracketingBar]", 
+       RowBox[{"X", 
+        RowBox[{"\[LeftBracketingBar]", " ", 
+         RowBox[{"=", " ", 
+          RowBox[{
+           SuperscriptBox["2", "3"], "=", " ", "8"}]}], " "}]}]}]}]}]}], 
+   "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"unifCrossoverTrans", "[", "dim_", "]"}], ":=", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"1", "/", 
+       RowBox[{"(", 
+        RowBox[{"2", "*", 
+         RowBox[{"(", 
+          RowBox[{"2", "^", "dim"}], ")"}]}], ")"}]}], ")"}], 
+     RowBox[{"unifCrossoverSmatrix", "[", "dim", "]"}]}]}], ";"}]}]], "Input",\
+
+ CellChangeTimes->{{3.781000699949807*^9, 3.781000897382175*^9}, {
+  3.781000954681554*^9, 3.781000973485821*^9}, {3.781001038852118*^9, 
+  3.781001068568839*^9}, {3.7810011170502768`*^9, 3.7810011726100616`*^9}, {
+  3.781001217054133*^9, 
+  3.7810012413530607`*^9}},ExpressionUUID->"cfd641bd-4f55-43a4-b00f-\
+f9a2d47183d2"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"unifCrossoverSmatrix", "[", "3", "]"}], "//", 
+  "MatrixForm"}]], "Input",
+ CellChangeTimes->{{3.781001293707671*^9, 
+  3.781001301110836*^9}},ExpressionUUID->"9ac4b35c-308a-460e-89a5-\
+704d9916c388"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {
+      FractionBox["27", "4"], 
+      FractionBox["9", "4"], 
+      FractionBox["9", "4"], 
+      FractionBox["3", "4"], 
+      FractionBox["9", "4"], 
+      FractionBox["3", "4"], 
+      FractionBox["3", "4"], 
+      FractionBox["1", "4"]},
+     {
+      FractionBox["9", "4"], 
+      FractionBox["27", "4"], 
+      FractionBox["3", "4"], 
+      FractionBox["9", "4"], 
+      FractionBox["3", "4"], 
+      FractionBox["9", "4"], 
+      FractionBox["1", "4"], 
+      FractionBox["3", "4"]},
+     {
+      FractionBox["9", "4"], 
+      FractionBox["3", "4"], 
+      FractionBox["27", "4"], 
+      FractionBox["9", "4"], 
+      FractionBox["3", "4"], 
+      FractionBox["1", "4"], 
+      FractionBox["9", "4"], 
+      FractionBox["3", "4"]},
+     {
+      FractionBox["3", "4"], 
+      FractionBox["9", "4"], 
+      FractionBox["9", "4"], 
+      FractionBox["27", "4"], 
+      FractionBox["1", "4"], 
+      FractionBox["3", "4"], 
+      FractionBox["3", "4"], 
+      FractionBox["9", "4"]},
+     {
+      FractionBox["9", "4"], 
+      FractionBox["3", "4"], 
+      FractionBox["3", "4"], 
+      FractionBox["1", "4"], 
+      FractionBox["27", "4"], 
+      FractionBox["9", "4"], 
+      FractionBox["9", "4"], 
+      FractionBox["3", "4"]},
+     {
+      FractionBox["3", "4"], 
+      FractionBox["9", "4"], 
+      FractionBox["1", "4"], 
+      FractionBox["3", "4"], 
+      FractionBox["9", "4"], 
+      FractionBox["27", "4"], 
+      FractionBox["3", "4"], 
+      FractionBox["9", "4"]},
+     {
+      FractionBox["3", "4"], 
+      FractionBox["1", "4"], 
+      FractionBox["9", "4"], 
+      FractionBox["3", "4"], 
+      FractionBox["9", "4"], 
+      FractionBox["3", "4"], 
+      FractionBox["27", "4"], 
+      FractionBox["9", "4"]},
+     {
+      FractionBox["1", "4"], 
+      FractionBox["3", "4"], 
+      FractionBox["3", "4"], 
+      FractionBox["9", "4"], 
+      FractionBox["3", "4"], 
+      FractionBox["9", "4"], 
+      FractionBox["9", "4"], 
+      FractionBox["27", "4"]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.781001305491478*^9},ExpressionUUID->"0e45ece1-aad0-45a5-8af5-\
+2f76f8cda65c"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"unifCrossoverTrans", "[", "3", "]"}], "//", 
+  "MatrixForm"}]], "Input",
+ CellChangeTimes->{{3.781001306728194*^9, 
+  3.781001316867854*^9}},ExpressionUUID->"b69cadb6-13b2-45c7-8ddf-\
+31c2c6b1cf87"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {
+      FractionBox["27", "64"], 
+      FractionBox["9", "64"], 
+      FractionBox["9", "64"], 
+      FractionBox["3", "64"], 
+      FractionBox["9", "64"], 
+      FractionBox["3", "64"], 
+      FractionBox["3", "64"], 
+      FractionBox["1", "64"]},
+     {
+      FractionBox["9", "64"], 
+      FractionBox["27", "64"], 
+      FractionBox["3", "64"], 
+      FractionBox["9", "64"], 
+      FractionBox["3", "64"], 
+      FractionBox["9", "64"], 
+      FractionBox["1", "64"], 
+      FractionBox["3", "64"]},
+     {
+      FractionBox["9", "64"], 
+      FractionBox["3", "64"], 
+      FractionBox["27", "64"], 
+      FractionBox["9", "64"], 
+      FractionBox["3", "64"], 
+      FractionBox["1", "64"], 
+      FractionBox["9", "64"], 
+      FractionBox["3", "64"]},
+     {
+      FractionBox["3", "64"], 
+      FractionBox["9", "64"], 
+      FractionBox["9", "64"], 
+      FractionBox["27", "64"], 
+      FractionBox["1", "64"], 
+      FractionBox["3", "64"], 
+      FractionBox["3", "64"], 
+      FractionBox["9", "64"]},
+     {
+      FractionBox["9", "64"], 
+      FractionBox["3", "64"], 
+      FractionBox["3", "64"], 
+      FractionBox["1", "64"], 
+      FractionBox["27", "64"], 
+      FractionBox["9", "64"], 
+      FractionBox["9", "64"], 
+      FractionBox["3", "64"]},
+     {
+      FractionBox["3", "64"], 
+      FractionBox["9", "64"], 
+      FractionBox["1", "64"], 
+      FractionBox["3", "64"], 
+      FractionBox["9", "64"], 
+      FractionBox["27", "64"], 
+      FractionBox["3", "64"], 
+      FractionBox["9", "64"]},
+     {
+      FractionBox["3", "64"], 
+      FractionBox["1", "64"], 
+      FractionBox["9", "64"], 
+      FractionBox["3", "64"], 
+      FractionBox["9", "64"], 
+      FractionBox["3", "64"], 
+      FractionBox["27", "64"], 
+      FractionBox["9", "64"]},
+     {
+      FractionBox["1", "64"], 
+      FractionBox["3", "64"], 
+      FractionBox["3", "64"], 
+      FractionBox["9", "64"], 
+      FractionBox["3", "64"], 
+      FractionBox["9", "64"], 
+      FractionBox["9", "64"], 
+      FractionBox["27", "64"]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.78100131750844*^9},ExpressionUUID->"bdd9227a-41a3-46f7-b41d-5998ec0c34b4"]
+}, Open  ]],
+
+Cell["\<\
+Verify that indeed each row of the transition matrix adds up to 1:\
+\>", "Text",
+ CellChangeTimes->{{3.78100134582817*^9, 3.781001382112226*^9}, {
+  3.781001521678205*^9, 
+  3.781001523826013*^9}},ExpressionUUID->"20ea4ffb-89ac-42a7-a9c9-\
+51fd5cacb836"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Total", "[", 
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"unifCrossoverTrans", "[", "3", "]"}], "[", 
+       RowBox[{"[", "#", "]"}], "]"}], "&"}], ")"}], "/@", " ", 
+    RowBox[{"Range", "[", "8", "]"}]}], ")"}], "]"}]], "Input",
+ CellChangeTimes->{{3.781001404649761*^9, 
+  3.78100147472801*^9}},ExpressionUUID->"96266d8a-5c77-4f47-9574-\
+18aad036b73d"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1"}],
+   "}"}]], "Output",
+ CellChangeTimes->{
+  3.781001475912397*^9},ExpressionUUID->"43b9f7b3-9e34-4345-849a-\
+7223814edc96"]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"start3", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "1", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+     "0"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"p3", "=", 
+   RowBox[{"DiscreteMarkovProcess", "[", 
+    RowBox[{"start3", ",", 
+     RowBox[{"unifCrossoverTrans", "[", "3", "]"}]}], "]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.7809878164552507`*^9, 3.780987891663443*^9}, {
+   3.780988009228015*^9, 3.780988016793166*^9}, 3.781001564034264*^9, {
+   3.78100160149349*^9, 
+   3.781001601826427*^9}},ExpressionUUID->"ec0f7782-5c31-4568-b4d8-\
+625528bf2974"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Graph", "[", "p3", "]"}]], "Input",
+ CellChangeTimes->{{3.781001605262949*^9, 
+  3.781001609107195*^9}},ExpressionUUID->"12aaae5f-4796-4fce-a6aa-\
+07163e9af2ac"],
+
+Cell[BoxData[
+ GraphicsBox[
+  NamespaceBox["NetworkGraphics",
+   DynamicModuleBox[{Typeset`graph = HoldComplete[
+     Graph[{1, 2, 3, 4, 5, 6, 7, 8}, {
+      SparseArray[
+       Automatic, {8, 8}, 0, {
+        1, {{0, 8, 16, 24, 32, 40, 48, 56, 64}, {{1}, {2}, {3}, {4}, {5}, {
+          6}, {7}, {8}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {1}, {2}, {
+          3}, {4}, {5}, {6}, {7}, {8}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {
+          8}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {1}, {2}, {3}, {4}, {
+          5}, {6}, {7}, {8}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {1}, {
+          2}, {3}, {4}, {5}, {6}, {7}, {8}}}, {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+         1, 1, 1, 1, 1, 1, 1, 1}}], Null}, {
+      EdgeLabels -> {DirectedEdge[1, 6] -> Placed[
+           Rational[3, 64], Tooltip], DirectedEdge[3, 4] -> Placed[
+           Rational[9, 64], Tooltip], DirectedEdge[4, 5] -> Placed[
+           Rational[1, 64], Tooltip], DirectedEdge[7, 8] -> Placed[
+           Rational[9, 64], Tooltip], DirectedEdge[8, 4] -> Placed[
+           Rational[9, 64], Tooltip], DirectedEdge[4, 1] -> Placed[
+           Rational[3, 64], Tooltip], DirectedEdge[4, 2] -> Placed[
+           Rational[9, 64], Tooltip], DirectedEdge[8, 2] -> Placed[
+           Rational[3, 64], Tooltip], DirectedEdge[6, 6] -> Placed[
+           Rational[27, 64], Tooltip], DirectedEdge[2, 2] -> Placed[
+           Rational[27, 64], Tooltip], DirectedEdge[1, 1] -> Placed[
+           Rational[27, 64], Tooltip], DirectedEdge[7, 7] -> Placed[
+           Rational[27, 64], Tooltip], DirectedEdge[4, 7] -> Placed[
+           Rational[3, 64], Tooltip], DirectedEdge[4, 3] -> Placed[
+           Rational[9, 64], Tooltip], DirectedEdge[1, 3] -> Placed[
+           Rational[9, 64], Tooltip], DirectedEdge[5, 5] -> Placed[
+           Rational[27, 64], Tooltip], DirectedEdge[1, 2] -> Placed[
+           Rational[9, 64], Tooltip], DirectedEdge[8, 3] -> Placed[
+           Rational[3, 64], Tooltip], DirectedEdge[6, 2] -> Placed[
+           Rational[9, 64], Tooltip], DirectedEdge[8, 8] -> Placed[
+           Rational[27, 64], Tooltip], DirectedEdge[2, 1] -> Placed[
+           Rational[9, 64], Tooltip], DirectedEdge[8, 7] -> Placed[
+           Rational[9, 64], Tooltip], DirectedEdge[6, 8] -> Placed[
+           Rational[9, 64], Tooltip], DirectedEdge[6, 1] -> Placed[
+           Rational[3, 64], Tooltip], DirectedEdge[1, 7] -> Placed[
+           Rational[3, 64], Tooltip], DirectedEdge[2, 5] -> Placed[
+           Rational[3, 64], Tooltip], DirectedEdge[7, 2] -> Placed[
+           Rational[1, 64], Tooltip], DirectedEdge[7, 5] -> Placed[
+           Rational[9, 64], Tooltip], DirectedEdge[5, 3] -> Placed[
+           Rational[3, 64], Tooltip], DirectedEdge[3, 1] -> Placed[
+           Rational[9, 64], Tooltip], DirectedEdge[6, 3] -> Placed[
+           Rational[1, 64], Tooltip], DirectedEdge[2, 4] -> Placed[
+           Rational[9, 64], Tooltip], DirectedEdge[6, 4] -> Placed[
+           Rational[3, 64], Tooltip], DirectedEdge[7, 3] -> Placed[
+           Rational[9, 64], Tooltip], DirectedEdge[3, 3] -> Placed[
+           Rational[27, 64], Tooltip], DirectedEdge[5, 2] -> Placed[
+           Rational[3, 64], Tooltip], DirectedEdge[3, 8] -> Placed[
+           Rational[3, 64], Tooltip], DirectedEdge[8, 1] -> Placed[
+           Rational[1, 64], Tooltip], DirectedEdge[2, 6] -> Placed[
+           Rational[9, 64], Tooltip], DirectedEdge[4, 4] -> Placed[
+           Rational[27, 64], Tooltip], DirectedEdge[8, 5] -> Placed[
+           Rational[3, 64], Tooltip], DirectedEdge[4, 8] -> Placed[
+           Rational[9, 64], Tooltip], DirectedEdge[5, 6] -> Placed[
+           Rational[9, 64], Tooltip], DirectedEdge[1, 8] -> Placed[
+           Rational[1, 64], Tooltip], DirectedEdge[7, 4] -> Placed[
+           Rational[3, 64], Tooltip], DirectedEdge[5, 4] -> Placed[
+           Rational[1, 64], Tooltip], DirectedEdge[3, 6] -> Placed[
+           Rational[1, 64], Tooltip], DirectedEdge[1, 5] -> Placed[
+           Rational[9, 64], Tooltip], DirectedEdge[5, 1] -> Placed[
+           Rational[9, 64], Tooltip], DirectedEdge[3, 5] -> Placed[
+           Rational[3, 64], Tooltip], DirectedEdge[8, 6] -> Placed[
+           Rational[9, 64], Tooltip], DirectedEdge[6, 5] -> Placed[
+           Rational[9, 64], Tooltip], DirectedEdge[3, 2] -> Placed[
+           Rational[3, 64], Tooltip], DirectedEdge[4, 6] -> Placed[
+           Rational[3, 64], Tooltip], DirectedEdge[2, 8] -> Placed[
+           Rational[3, 64], Tooltip], DirectedEdge[2, 3] -> Placed[
+           Rational[3, 64], Tooltip], DirectedEdge[1, 4] -> Placed[
+           Rational[3, 64], Tooltip], DirectedEdge[2, 7] -> Placed[
+           Rational[1, 64], Tooltip], DirectedEdge[6, 7] -> Placed[
+           Rational[3, 64], Tooltip], DirectedEdge[7, 1] -> Placed[
+           Rational[3, 64], Tooltip], DirectedEdge[7, 6] -> Placed[
+           Rational[3, 64], Tooltip], DirectedEdge[3, 7] -> Placed[
+           Rational[9, 64], Tooltip], DirectedEdge[5, 7] -> Placed[
+           Rational[9, 64], Tooltip], DirectedEdge[5, 8] -> Placed[
+           Rational[3, 64], Tooltip]}, EdgeStyle -> {
+         Arrowheads[Medium]}, GraphLayout -> "SpringElectricalEmbedding", 
+       ImagePadding -> All, 
+       Properties -> {
+        DirectedEdge[4, 3] -> {"Probability" -> Rational[9, 64]}, 
+         DirectedEdge[3, 7] -> {"Probability" -> Rational[9, 64]}, 
+         DirectedEdge[2, 6] -> {"Probability" -> Rational[9, 64]}, 
+         DirectedEdge[7, 6] -> {"Probability" -> Rational[3, 64]}, 
+         DirectedEdge[6, 4] -> {"Probability" -> Rational[3, 64]}, 
+         DirectedEdge[5, 6] -> {"Probability" -> Rational[9, 64]}, 
+         DirectedEdge[5, 1] -> {"Probability" -> Rational[9, 64]}, 
+         DirectedEdge[2, 2] -> {"Probability" -> Rational[27, 64]}, 
+         DirectedEdge[4, 8] -> {"Probability" -> Rational[9, 64]}, 
+         DirectedEdge[8, 4] -> {"Probability" -> Rational[9, 64]}, 
+         DirectedEdge[6, 2] -> {"Probability" -> Rational[9, 64]}, 
+         DirectedEdge[1, 1] -> {"Probability" -> Rational[27, 64]}, 
+         DirectedEdge[6, 3] -> {"Probability" -> Rational[1, 64]}, 
+         DirectedEdge[7, 2] -> {"Probability" -> Rational[1, 64]}, 
+         DirectedEdge[3, 1] -> {"Probability" -> Rational[9, 64]}, 
+         DirectedEdge[2, 3] -> {"Probability" -> Rational[3, 64]}, 
+         DirectedEdge[4, 5] -> {"Probability" -> Rational[1, 64]}, 
+         DirectedEdge[2, 1] -> {"Probability" -> Rational[9, 64]}, 
+         DirectedEdge[3, 2] -> {"Probability" -> Rational[3, 64]}, 
+         DirectedEdge[7, 1] -> {"Probability" -> Rational[3, 64]}, 
+         DirectedEdge[6, 1] -> {"Probability" -> Rational[3, 64]}, 
+         DirectedEdge[4, 4] -> {"Probability" -> Rational[27, 64]}, 
+         DirectedEdge[1, 2] -> {"Probability" -> Rational[9, 64]}, 
+         DirectedEdge[7, 5] -> {"Probability" -> Rational[9, 64]}, 
+         DirectedEdge[1, 3] -> {"Probability" -> Rational[9, 64]}, 
+         DirectedEdge[8, 6] -> {"Probability" -> Rational[9, 64]}, 
+         DirectedEdge[3, 3] -> {"Probability" -> Rational[27, 64]}, 
+         DirectedEdge[5, 4] -> {"Probability" -> Rational[1, 64]}, 
+         DirectedEdge[8, 5] -> {"Probability" -> Rational[3, 64]}, 
+         DirectedEdge[7, 8] -> {"Probability" -> Rational[9, 64]}, 
+         DirectedEdge[6, 8] -> {"Probability" -> Rational[9, 64]}, 
+         DirectedEdge[3, 4] -> {"Probability" -> Rational[9, 64]}, 
+         DirectedEdge[4, 2] -> {"Probability" -> Rational[9, 64]}, 
+         DirectedEdge[1, 5] -> {"Probability" -> Rational[9, 64]}, 
+         DirectedEdge[1, 4] -> {"Probability" -> Rational[3, 64]}, 
+         DirectedEdge[5, 3] -> {"Probability" -> Rational[3, 64]}, 
+         DirectedEdge[2, 7] -> {"Probability" -> Rational[1, 64]}, 
+         DirectedEdge[6, 6] -> {"Probability" -> Rational[27, 64]}, 
+         DirectedEdge[7, 4] -> {"Probability" -> Rational[3, 64]}, 
+         DirectedEdge[3, 6] -> {"Probability" -> Rational[1, 64]}, 
+         DirectedEdge[2, 8] -> {"Probability" -> Rational[3, 64]}, 
+         DirectedEdge[1, 7] -> {"Probability" -> Rational[3, 64]}, 
+         DirectedEdge[2, 5] -> {"Probability" -> Rational[3, 64]}, 
+         DirectedEdge[6, 5] -> {"Probability" -> Rational[9, 64]}, 
+         DirectedEdge[5, 8] -> {"Probability" -> Rational[3, 64]}, 
+         DirectedEdge[5, 7] -> {"Probability" -> Rational[9, 64]}, 
+         DirectedEdge[2, 4] -> {"Probability" -> Rational[9, 64]}, 
+         DirectedEdge[6, 7] -> {"Probability" -> Rational[3, 64]}, 
+         DirectedEdge[5, 2] -> {"Probability" -> Rational[3, 64]}, 
+         DirectedEdge[1, 6] -> {"Probability" -> Rational[3, 64]}, 
+         DirectedEdge[3, 8] -> {"Probability" -> Rational[3, 64]}, 
+         DirectedEdge[8, 8] -> {"Probability" -> Rational[27, 64]}, 
+         DirectedEdge[3, 5] -> {"Probability" -> Rational[3, 64]}, 
+         DirectedEdge[4, 7] -> {"Probability" -> Rational[3, 64]}, 
+         DirectedEdge[4, 6] -> {"Probability" -> Rational[3, 64]}, 
+         DirectedEdge[8, 7] -> {"Probability" -> Rational[9, 64]}, 
+         DirectedEdge[5, 5] -> {"Probability" -> Rational[27, 64]}, 
+         DirectedEdge[8, 2] -> {"Probability" -> Rational[3, 64]}, 
+         DirectedEdge[4, 1] -> {"Probability" -> Rational[3, 64]}, 
+         DirectedEdge[1, 8] -> {"Probability" -> Rational[1, 64]}, 
+         DirectedEdge[7, 3] -> {"Probability" -> Rational[9, 64]}, 
+         DirectedEdge[7, 7] -> {"Probability" -> Rational[27, 64]}, 
+         DirectedEdge[8, 1] -> {"Probability" -> Rational[1, 64]}, 
+         DirectedEdge[8, 3] -> {"Probability" -> Rational[3, 64]}}, 
+       VertexLabels -> {
+         Placed["Name", Center]}, 
+       VertexShapeFunction -> {
+        3 -> "Circle", 7 -> "Circle", 8 -> "Circle", 4 -> "Circle", 2 -> 
+         "Circle", 6 -> "Circle", 1 -> "Circle", 5 -> "Circle"}, 
+       VertexSize -> {0.27}, 
+       VertexStyle -> {
+        3 -> Hue[0.14, 1, 0.9], 1 -> Hue[0.14, 1, 0.9], 2 -> 
+         Hue[0.14, 1, 0.9], 4 -> Hue[0.14, 1, 0.9], 7 -> Hue[0.14, 1, 0.9], 5 -> 
+         Hue[0.14, 1, 0.9], 6 -> Hue[0.14, 1, 0.9], 8 -> 
+         Hue[0.14, 1, 0.9]}}]]}, 
+    TagBox[GraphicsGroupBox[{
+       {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.37735946115732527`, 
+           1.3434226436628522`}, {0.16710987347544132`, 
+           1.3387273527090666`}, {0.028809983183319537`, 
+           1.4923708535040277`}, {0.025661788366344, 1.6325079069063468`}, {
+           0.3635474809399013, 1.7984729394254484`}, {0.4725317614669924, 
+           1.71032118694779}, {0.5095926203345841, 1.506950398162034}, {
+           0.37735946115732527`, 1.3434226436628522`}},
+           SplineDegree->7], 0.08265336389432451],
+          FractionBox["27", "64"]],
+         Annotation[#, 
+          Rational[27, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.37735946115732527`, 
+           1.3434226436628522`}, {0.9865490906038014, 0.9495622906010537}, {
+           1.243037582154378, 0.27099642346590885`}}], 0.08265336389432451],
+          FractionBox["9", "64"]],
+         Annotation[#, 
+          Rational[9, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.37735946115732527`, 
+           1.3434226436628522`}, {0.26796104673733734`, 1.040305896112131}, {
+           0., 0.8612956920601088}}], 0.08265336389432451],
+          FractionBox["9", "64"]],
+         Annotation[#, 
+          Rational[9, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.37735946115732527`, 
+           1.3434226436628522`}, {0.6372777662588724, 1.0770044395927598`}, {
+           0.6883214445757156, 0.708316593724664}}], 0.08265336389432451],
+          FractionBox["3", "64"]],
+         Annotation[#, 
+          Rational[3, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.37735946115732527`, 
+           1.3434226436628522`}, {0.7559048762561958, 0.723553566852041}, {
+           0.6926234447417933, 0.}}], 0.08265336389432451],
+          FractionBox["9", "64"]],
+         Annotation[#, 
+          Rational[9, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.37735946115732527`, 
+           1.3434226436628522`}, {0.4357998866431337, 0.7647136372857399}, {
+           0.13933264941368195`, 0.26428724445415214`}}], 0.08265336389432451],
+          FractionBox["3", "64"]],
+         Annotation[#, 
+          Rational[3, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.37735946115732527`, 
+           1.3434226436628522`}, {0.9559841765004573, 1.2711249057206373`}, {
+           1.3787415837426749`, 0.8694911188706795}}], 0.08265336389432451],
+          FractionBox["3", "64"]],
+         Annotation[#, 
+          Rational[3, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.37735946115732527`, 
+           1.3434226436628522`}, {0.6842128803211862, 1.446538831250052}, {
+           0.9923708151731587, 1.3473891656789956`}}], 0.08265336389432451],
+          FractionBox["1", "64"]],
+         Annotation[#, 
+          Rational[1, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.243037582154378, 
+           0.27099642346590885`}, {0.6338479527079021, 0.6648567765275464}, {
+           0.37735946115732527`, 1.3434226436628522`}}], 0.08265336389432451],
+          
+          FractionBox["9", "64"]],
+         Annotation[#, 
+          Rational[9, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.243037582154378, 
+           0.27099642346590885`}, {1.4306861915649185`, 
+           0.36594343112719996`}, {1.6217406986039544`, 0.2870044652643711}, {
+           1.6850422850702733`, 0.1619396260097951}, {
+           1.451827233153172, -0.1335631198734547}, {
+           1.3154755922865355`, -0.10105873709356539`}, {1.1942981664280499`, 
+           0.06642026592989728}, {1.243037582154378, 0.27099642346590885`}},
+           SplineDegree->7], 0.08265336389432451],
+          FractionBox["27", "64"]],
+         Annotation[#, 
+          Rational[27, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.243037582154378, 
+           0.27099642346590885`}, {0.5244495382879071, 
+           0.36174002897683377`}, {0., 0.8612956920601088}}], 
+           0.08265336389432451],
+          FractionBox["3", "64"]],
+         Annotation[#, 
+          Rational[3, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.243037582154378, 
+           0.27099642346590885`}, {0.8937662578094479, 0.3984385724573515}, {
+           0.6883214445757156, 0.708316593724664}}], 0.08265336389432451],
+          FractionBox["9", "64"]],
+         Annotation[#, 
+          Rational[9, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.243037582154378, 
+           0.27099642346590885`}, {1.01239336780677, 0.0449876997166829}, {
+           0.6926234447417933, 0.}}], 0.08265336389432451],
+          FractionBox["3", "64"]],
+         Annotation[#, 
+          Rational[3, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.243037582154378, 
+           0.27099642346590885`}, {0.6922883781937118, 0.08614777015045837}, {
+           0.13933264941368195`, 0.26428724445415214`}}], 0.08265336389432451],
+          FractionBox["9", "64"]],
+         Annotation[#, 
+          Rational[9, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.243037582154378, 
+           0.27099642346590885`}, {1.2124726680510365`, 0.5925590385859905}, {
+           1.3787415837426749`, 0.8694911188706795}}], 0.08265336389432451],
+          FractionBox["1", "64"]],
+         Annotation[#, 
+          Rational[1, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.243037582154378, 
+           0.27099642346590885`}, {0.9407013718717643, 0.7679729641163345}, {
+           0.9923708151731587, 1.3473891656789956`}}], 0.08265336389432451],
+          FractionBox["3", "64"]],
+         Annotation[#, 
+          Rational[3, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0., 0.8612956920601088}, {
+           0.10939841441998945`, 1.1644124396110676`}, {0.37735946115732527`, 
+           1.3434226436628522`}}], 0.08265336389432451],
+          FractionBox["9", "64"]],
+         Annotation[#, 
+          Rational[9, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0., 0.8612956920601088}, {
+           0.718588043866467, 0.7705520865491332}, {1.243037582154378, 
+           0.27099642346590885`}}], 0.08265336389432451],
+          FractionBox["3", "64"]],
+         Annotation[#, 
+          Rational[3, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0., 
+           0.8612956920601088}, {-0.12754869637907557`, 
+           0.6940884406337986}, {-0.3339101998817258, 
+           0.6819181956292891}, {-0.44537001188622516`, 
+           0.7669182848928405}, {-0.3641701630434867, 
+           1.1345019050568725`}, {-0.227276086284206, 
+           1.1646401965664157`}, {-0.045244094889759334`, 
+           1.0666731658861088`}, {0., 0.8612956920601088}},
+           SplineDegree->7], 0.08265336389432451],
+          FractionBox["27", "64"]],
+         Annotation[#, 
+          Rational[27, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0., 0.8612956920601088}, {
+           0.369316719521539, 0.8979942355407083}, {0.6883214445757156, 
+           0.708316593724664}}], 0.08265336389432451],
+          FractionBox["9", "64"]],
+         Annotation[#, 
+          Rational[9, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0., 0.8612956920601088}, {
+           0.48794382951886023`, 0.5445433627998686}, {0.6926234447417933, 
+           0.}}], 0.08265336389432451],
+          FractionBox["3", "64"]],
+         Annotation[#, 
+          Rational[3, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0., 0.8612956920601088}, {
+           0.16783883990579654`, 0.5857034332337095}, {0.13933264941368195`, 
+           0.26428724445415214`}}], 0.08265336389432451],
+          FractionBox["1", "64"]],
+         Annotation[#, 
+          Rational[1, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0., 0.8612956920601088}, {
+           0.68802312976312, 1.0921147016684296`}, {1.3787415837426749`, 
+           0.8694911188706795}}], 0.08265336389432451],
+          FractionBox["9", "64"]],
+         Annotation[#, 
+          Rational[9, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0., 0.8612956920601088}, {
+           0.41625183358385237`, 1.2675286271992554`}, {0.9923708151731587, 
+           1.3473891656789956`}}], 0.08265336389432451],
+          FractionBox["3", "64"]],
+         Annotation[#, 
+          Rational[3, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.6883214445757156, 0.708316593724664}, {
+           0.4284031394741671, 0.974734797795206}, {0.37735946115732527`, 
+           1.3434226436628522`}}], 0.08265336389432451],
+          FractionBox["3", "64"]],
+         Annotation[#, 
+          Rational[3, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.6883214445757156, 0.708316593724664}, {
+           1.0375927689206441`, 0.5808744447331693}, {1.243037582154378, 
+           0.27099642346590885`}}], 0.08265336389432451],
+          FractionBox["9", "64"]],
+         Annotation[#, 
+          Rational[9, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.6883214445757156, 0.708316593724664}, {
+           0.319004725054179, 0.6716180502445621}, {0., 0.8612956920601088}}],
+            0.08265336389432451],
+          FractionBox["9", "64"]],
+         Annotation[#, 
+          Rational[9, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.6883214445757156, 0.708316593724664}, {
+           0.5577407498329481, 1.0990094788368168`}, {0.5856414244513422, 
+           1.160756018793808}, {0.6201891176928929, 1.1903090834972052`}, {
+           0.751033290828719, 1.1910442586695487`}, {0.7859108923908427, 
+           1.1618812744095448`}, {0.8145036550461049, 1.1004521545675543`}, {
+           0.6883214445757156, 0.708316593724664}},
+           SplineDegree->7], 0.08265336389432451],
+          FractionBox["27", "64"]],
+         Annotation[#, 
+          Rational[27, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.6883214445757156, 0.708316593724664}, {
+           0.8069485545730384, 0.35486572098401187`}, {0.6926234447417933, 
+           0.}}], 0.08265336389432451],
+          FractionBox["1", "64"]],
+         Annotation[#, 
+          Rational[1, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.6883214445757156, 0.708316593724664}, {
+           0.48684356495997594`, 0.3960257914177106}, {0.13933264941368195`, 
+           0.26428724445415214`}}], 0.08265336389432451],
+          FractionBox["3", "64"]],
+         Annotation[#, 
+          Rational[3, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.6883214445757156, 0.708316593724664}, {
+           1.0070278548173008`, 0.9024370598528322}, {1.3787415837426749`, 
+           0.8694911188706795}}], 0.08265336389432451],
+          FractionBox["3", "64"]],
+         Annotation[#, 
+          Rational[3, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.6883214445757156, 0.708316593724664}, {
+           0.7352565586380296, 1.0778509853828624`}, {0.9923708151731587, 
+           1.3473891656789956`}}], 0.08265336389432451],
+          FractionBox["9", "64"]],
+         Annotation[#, 
+          Rational[9, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.6926234447417933, 0.}, {
+           0.3140780296429212, 0.6198690768108595}, {0.37735946115732527`, 
+           1.3434226436628522`}}], 0.08265336389432451],
+          FractionBox["9", "64"]],
+         Annotation[#, 
+          Rational[9, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.6926234447417933, 0.}, {
+           0.9232676590894013, 0.2260087237492376}, {1.243037582154378, 
+           0.27099642346590885`}}], 0.08265336389432451],
+          FractionBox["3", "64"]],
+         Annotation[#, 
+          Rational[3, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.6926234447417933, 0.}, {
+           0.20467961522293399`, 0.3167523292601731}, {0., 
+           0.8612956920601088}}], 0.08265336389432451],
+          FractionBox["3", "64"]],
+         Annotation[#, 
+          Rational[3, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.6926234447417933, 0.}, {
+           0.5739963347444709, 0.35345087274061787`}, {0.6883214445757156, 
+           0.708316593724664}}], 0.08265336389432451],
+          FractionBox["1", "64"]],
+         Annotation[#, 
+          Rational[1, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.6926234447417933, 0.}, {
+           0.883929569770783, -0.08734358250000662}, {
+           0.9415070457239653, -0.285883299569929}, {
+           0.8833069723855603, -0.413402146531052}, {
+           0.5068682315070709, -0.4156399201559874}, {
+           0.4471562306739705, -0.2888220120223257}, {
+           0.502369246756527, -0.08961180182613257}, {0.6926234447417933, 0.}},
+           SplineDegree->7], 0.08265336389432451],
+          FractionBox["27", "64"]],
+         Annotation[#, 
+          Rational[27, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.6926234447417933, 0.}, {
+           0.37251845512872866`, 0.041160070433781}, {0.13933264941368195`, 
+           0.26428724445415214`}}], 0.08265336389432451],
+          FractionBox["9", "64"]],
+         Annotation[#, 
+          Rational[9, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.6926234447417933, 0.}, {
+           0.8927027449860567, 0.5475713388685398}, {1.3787415837426749`, 
+           0.8694911188706795}}], 0.08265336389432451],
+          FractionBox["9", "64"]],
+         Annotation[#, 
+          Rational[9, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.6926234447417933, 0.}, {
+           0.6209314488067844, 0.7229852643994048}, {0.9923708151731587, 
+           1.3473891656789956`}}], 0.08265336389432451],
+          FractionBox["3", "64"]],
+         Annotation[#, 
+          Rational[3, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.13933264941368195`, 
+           0.26428724445415214`}, {0.08089222392787421, 0.8429962508312516}, {
+           0.37735946115732527`, 1.3434226436628522`}}], 0.08265336389432451],
+          
+          FractionBox["3", "64"]],
+         Annotation[#, 
+          Rational[3, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.13933264941368195`, 
+           0.26428724445415214`}, {0.6900818533743509, 
+           0.44913589776959606`}, {1.243037582154378, 0.27099642346590885`}}],
+            0.08265336389432451],
+          FractionBox["9", "64"]],
+         Annotation[#, 
+          Rational[9, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.13933264941368195`, 
+           0.26428724445415214`}, {-0.028506190492114468`, 
+           0.5398795032805127}, {0., 0.8612956920601088}}], 
+           0.08265336389432451],
+          FractionBox["1", "64"]],
+         Annotation[#, 
+          Rational[1, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.13933264941368195`, 
+           0.26428724445415214`}, {0.34081052902942305`, 
+           0.5765780467611156}, {0.6883214445757156, 0.708316593724664}}], 
+           0.08265336389432451],
+          FractionBox["3", "64"]],
+         Annotation[#, 
+          Rational[3, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.13933264941368195`, 
+           0.26428724445415214`}, {0.4594376390267442, 0.2231271740203807}, {
+           0.6926234447417933, 0.}}], 0.08265336389432451],
+          FractionBox["9", "64"]],
+         Annotation[#, 
+          Rational[9, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.13933264941368195`, 
+           0.26428724445415214`}, {0.18993142301919555`, 
+           0.06016302005351687}, {
+           0.07028285299639414, -0.1084116063967378}, {-0.06576739637736236, \
+-0.14215526524145564`}, {-0.3016614829972857, 
+           0.15121329674624442`}, {-0.2395004432549211, 
+           0.2768489206951794}, {-0.04917208603463064, 0.3575229650289651}, {
+           0.13933264941368195`, 0.26428724445415214`}},
+           SplineDegree->7], 0.08265336389432451],
+          FractionBox["27", "64"]],
+         Annotation[#, 
+          Rational[27, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.13933264941368195`, 
+           0.26428724445415214`}, {0.6595169392710057, 0.7706985128888759}, {
+           1.3787415837426749`, 0.8694911188706795}}], 0.08265336389432451],
+          FractionBox["3", "64"]],
+         Annotation[#, 
+          Rational[3, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.13933264941368195`, 
+           0.26428724445415214`}, {0.38774564309174103`, 
+           0.9461124384197653}, {0.9923708151731587, 1.3473891656789956`}}], 
+           0.08265336389432451],
+          FractionBox["9", "64"]],
+         Annotation[#, 
+          Rational[9, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.3787415837426749`, 
+           0.8694911188706795}, {0.8001168683995373, 0.9417888568127493}, {
+           0.37735946115732527`, 1.3434226436628522`}}], 0.08265336389432451],
+          
+          FractionBox["3", "64"]],
+         Annotation[#, 
+          Rational[3, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.3787415837426749`, 
+           0.8694911188706795}, {1.4093064978460161`, 0.5479285037509823}, {
+           1.243037582154378, 0.27099642346590885`}}], 0.08265336389432451],
+          FractionBox["1", "64"]],
+         Annotation[#, 
+          Rational[1, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.3787415837426749`, 
+           0.8694911188706795}, {0.6907184539795522, 0.6386721092621983}, {0.,
+            0.8612956920601088}}], 0.08265336389432451],
+          FractionBox["9", "64"]],
+         Annotation[#, 
+          Rational[9, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.3787415837426749`, 
+           0.8694911188706795}, {1.060035173501087, 0.6753706527425731}, {
+           0.6883214445757156, 0.708316593724664}}], 0.08265336389432451],
+          FractionBox["3", "64"]],
+         Annotation[#, 
+          Rational[3, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.3787415837426749`, 
+           0.8694911188706795}, {1.178662283498412, 0.3219197800021586}, {
+           0.6926234447417933, 0.}}], 0.08265336389432451],
+          FractionBox["9", "64"]],
+         Annotation[#, 
+          Rational[9, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.3787415837426749`, 
+           0.8694911188706795}, {0.8585572938853451, 0.36307985043594226`}, {
+           0.13933264941368195`, 0.26428724445415214`}}], 0.08265336389432451],
+          FractionBox["3", "64"]],
+         Annotation[#, 
+          Rational[3, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.3787415837426749`, 
+           0.8694911188706795}, {1.4217137980859396`, 1.0753559377980024`}, {
+           1.6026522872332578`, 1.1753281746261832`}, {1.7398709921976736`, 
+           1.1467042008493182`}, {1.8251271431680673`, 0.7800401557253214}, {
+           1.714613260277326, 0.6938137876277286}, {1.5081298891272066`, 
+           0.7037032987292047}, {1.3787415837426749`, 0.8694911188706795}},
+           SplineDegree->7], 0.08265336389432451],
+          FractionBox["27", "64"]],
+         Annotation[#, 
+          Rational[27, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{1.3787415837426749`, 
+           0.8694911188706795}, {1.106970287563407, 1.0449050444024641`}, {
+           0.9923708151731587, 1.3473891656789956`}}], 0.08265336389432451],
+          FractionBox["9", "64"]],
+         Annotation[#, 
+          Rational[9, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.9923708151731587, 
+           1.3473891656789956`}, {0.6855173960092986, 1.2442729780903785`}, {
+           0.37735946115732527`, 1.3434226436628522`}}], 0.08265336389432451],
+          
+          FractionBox["1", "64"]],
+         Annotation[#, 
+          Rational[1, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.9923708151731587, 
+           1.3473891656789956`}, {1.2947070254557707`, 0.8504126250290351}, {
+           1.243037582154378, 0.27099642346590885`}}], 0.08265336389432451],
+          FractionBox["3", "64"]],
+         Annotation[#, 
+          Rational[3, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.9923708151731587, 
+           1.3473891656789956`}, {0.5761189815893085, 0.9411562305400498}, {
+           0., 0.8612956920601088}}], 0.08265336389432451],
+          FractionBox["3", "64"]],
+         Annotation[#, 
+          Rational[3, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.9923708151731587, 
+           1.3473891656789956`}, {0.9454357011108443, 0.9778547740202129}, {
+           0.6883214445757156, 0.708316593724664}}], 0.08265336389432451],
+          FractionBox["9", "64"]],
+         Annotation[#, 
+          Rational[9, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.9923708151731587, 
+           1.3473891656789956`}, {1.064062811108167, 0.6244039012795325}, {
+           0.6926234447417933, 0.}}], 0.08265336389432451],
+          FractionBox["3", "64"]],
+         Annotation[#, 
+          Rational[3, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.9923708151731587, 
+           1.3473891656789956`}, {0.7439578214951007, 0.6655639717133047}, {
+           0.13933264941368195`, 0.26428724445415214`}}], 0.08265336389432451],
+          FractionBox["9", "64"]],
+         Annotation[#, 
+          Rational[9, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.9923708151731587, 
+           1.3473891656789956`}, {1.2641421113524252`, 1.1719752401481751`}, {
+           1.3787415837426749`, 0.8694911188706795}}], 0.08265336389432451],
+          FractionBox["9", "64"]],
+         Annotation[#, 
+          Rational[9, 64], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[
+          ArrowBox[BezierCurveBox[{{0.9923708151731587, 
+           1.3473891656789956`}, {0.8578057175687089, 1.5090034267584183`}, {
+           0.8919457384947012, 1.7128848726099644`}, {0.9996544131461582, 
+           1.8025907602189535`}, {1.339885847151175, 1.6414892252173625`}, {
+           1.3387480158413352`, 1.5013214321734525`}, {1.2026661205006746`, 
+           1.3457100484258693`}, {0.9923708151731587, 1.3473891656789956`}},
+           SplineDegree->7], 0.08265336389432451],
+          FractionBox["27", "64"]],
+         Annotation[#, 
+          Rational[27, 64], "Tooltip"]& ]}, 
+       {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], {
+         {Hue[0.14, 1, 0.9], 
+          DiskBox[{0.37735946115732527, 1.3434226436628522}, 
+           0.08265336389432451]}, 
+         InsetBox["1", {0.37735946115732527, 1.3434226436628522},
+          BaseStyle->"Graphics"]}, {
+         {Hue[0.14, 1, 0.9], 
+          DiskBox[{1.243037582154378, 0.27099642346590885}, 
+           0.08265336389432451]}, 
+         InsetBox["2", {1.243037582154378, 0.27099642346590885},
+          BaseStyle->"Graphics"]}, {
+         {Hue[0.14, 1, 0.9], 
+          DiskBox[{0., 0.8612956920601088}, 0.08265336389432451]}, 
+         InsetBox["3", {0., 0.8612956920601088},
+          BaseStyle->"Graphics"]}, {
+         {Hue[0.14, 1, 0.9], 
+          DiskBox[{0.6883214445757156, 0.708316593724664}, 
+           0.08265336389432451]}, 
+         InsetBox["4", {0.6883214445757156, 0.708316593724664},
+          BaseStyle->"Graphics"]}, {
+         {Hue[0.14, 1, 0.9], 
+          DiskBox[{0.6926234447417933, 0.}, 0.08265336389432451]}, 
+         InsetBox["5", {0.6926234447417933, 0.},
+          BaseStyle->"Graphics"]}, {
+         {Hue[0.14, 1, 0.9], 
+          DiskBox[{0.13933264941368195, 0.26428724445415214}, 
+           0.08265336389432451]}, 
+         InsetBox["6", {0.13933264941368195, 0.26428724445415214},
+          BaseStyle->"Graphics"]}, {
+         {Hue[0.14, 1, 0.9], 
+          DiskBox[{1.3787415837426749, 0.8694911188706795}, 
+           0.08265336389432451]}, 
+         InsetBox["7", {1.3787415837426749, 0.8694911188706795},
+          BaseStyle->"Graphics"]}, {
+         {Hue[0.14, 1, 0.9], 
+          DiskBox[{0.9923708151731587, 1.3473891656789956}, 
+           0.08265336389432451]}, 
+         InsetBox["8", {0.9923708151731587, 1.3473891656789956},
+          BaseStyle->"Graphics"]}}}],
+     MouseAppearanceTag["NetworkGraphics"]],
+    AllowKernelInitialization->False]],
+  DefaultBaseStyle->{
+   "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+  FormatType->TraditionalForm,
+  FrameTicks->None]], "Output",
+ CellChangeTimes->{
+  3.781001610136571*^9},ExpressionUUID->"53579fb1-fda2-45d2-af22-\
+284e4d324808"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"MarkovProcessProperties", "[", "p3", "]"}]], "Input",
+ CellChangeTimes->{{3.781001630487608*^9, 
+  3.7810016365959578`*^9}},ExpressionUUID->"e5aa55ed-6d9f-45bf-a3d7-\
+70b3a3ae4207"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox[
+        StyleBox["\<\"Basic Properties\"\>",
+         StripOnInput->False,
+         FontWeight->Bold], TextForm]], "InlineText",ExpressionUUID->
+       "18f1d1ff-8da1-4f30-9189-1f8093bc9a95"],
+      Text[
+       Style["Basic Properties", Bold]]], "\[SpanFromLeft]"},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"InitialProbabilities\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"c9b9c713-34bc-4c8b-b841-5000405427fd"],
+      Text["InitialProbabilities"]], 
+     GraphicsBox[
+      RasterBox[{{{1., 0.42, 0.}, {1., 1., 1.}, {1., 1., 1.}, {1., 1., 1.}, {
+       1., 1., 1.}, {1., 1., 1.}, {1., 1., 1.}, {1., 1., 1.}}}, {{0, 0}, {8, 
+       1}}, {0, 1}],
+      Frame->True,
+      FrameLabel->{None, None},
+      FrameTicks->{{False, False}, {False, False}},
+      GridLinesStyle->Directive[
+        GrayLevel[0.5, 0.4]],
+      ImageSize->Tiny,
+      Method->{
+       "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> Automatic, 
+        "DefaultPlotStyle" -> Automatic, "DomainPadding" -> Scaled[0.02], 
+        "RangePadding" -> Scaled[0.05]}]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"TransitionMatrix\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"e9a8b4c0-8c31-4073-90ab-ed4516930e29"],
+      Text["TransitionMatrix"]], 
+     GraphicsBox[RasterBox[CompressedData["
+1:eJxTTMoPSmVmYGDggGIQe33svn9C7O/sN4mLHvcPe2O/I6v6Xc3WZ/bz5tRq
+lIe/tZ/A3Gm9e99L+3Pz4k++encfp3jbJE77L5pv7B9KB3GJrHpin8Qg9f7q
+0WMkq8clzgAGH+wfVomsc394C8pnYMBlPi5/UcuduNTjcie17CU1vqgVnqTG
+F6npB5e/SA1ParmHWumT1vlroNInrfMXtdInrfMXrdMnrfMXAPLo1/Y=
+       "], {{0, 0}, {
+       8, 8}}, {0, 1}],
+      Frame->True,
+      FrameLabel->{None, None},
+      FrameTicks->{{False, False}, {False, False}},
+      GridLinesStyle->Directive[
+        GrayLevel[0.5, 0.4]],
+      ImageSize->Tiny,
+      Method->{
+       "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> Automatic, 
+        "DefaultPlotStyle" -> Automatic, "DomainPadding" -> Scaled[0.02], 
+        "RangePadding" -> Scaled[0.05]}]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"HoldingTimeMean\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"c9419a53-931e-4fd1-be86-10762d0c8ea9"],
+      Text["HoldingTimeMean"]], 
+     GraphicsBox[
+      RasterBox[{{{1., 0.42, 0.}, {1., 0.42, 0.}, {1., 0.42, 0.}, {1., 0.42, 
+       0.}, {1., 0.42, 0.}, {1., 0.42, 0.}, {1., 0.42, 0.}, {1., 0.42, 
+       0.}}}, {{0, 0}, {8, 1}}, {0, 1}],
+      Frame->True,
+      FrameLabel->{None, None},
+      FrameTicks->{{False, False}, {False, False}},
+      GridLinesStyle->Directive[
+        GrayLevel[0.5, 0.4]],
+      ImageSize->Tiny,
+      Method->{
+       "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> Automatic, 
+        "DefaultPlotStyle" -> Automatic, "DomainPadding" -> Scaled[0.02], 
+        "RangePadding" -> Scaled[0.05]}]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"HoldingTimeVariance\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"19da97cf-cd34-4a14-8e4e-420107131df2"],
+      Text["HoldingTimeVariance"]], 
+     GraphicsBox[
+      RasterBox[{{{1., 0.42, 0.}, {1., 0.42, 0.}, {1., 0.42, 0.}, {1., 0.42, 
+       0.}, {1., 0.42, 0.}, {1., 0.42, 0.}, {1., 0.42, 0.}, {1., 0.42, 
+       0.}}}, {{0, 0}, {8, 1}}, {0, 1}],
+      Frame->True,
+      FrameLabel->{None, None},
+      FrameTicks->{{False, False}, {False, False}},
+      GridLinesStyle->Directive[
+        GrayLevel[0.5, 0.4]],
+      ImageSize->Tiny,
+      Method->{
+       "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> Automatic, 
+        "DefaultPlotStyle" -> Automatic, "DomainPadding" -> Scaled[0.02], 
+        "RangePadding" -> Scaled[0.05]}]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox[
+        StyleBox["\<\"Structural Properties\"\>",
+         StripOnInput->False,
+         FontWeight->Bold], TextForm]], "InlineText",ExpressionUUID->
+       "93e9867f-2c83-4f67-8c9f-bef49e122a1c"],
+      Text[
+       Style["Structural Properties", Bold]]], "\[SpanFromLeft]"},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"CommunicatingClasses\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"b3db83f7-adf1-4e03-a4c6-2b88488f581b"],
+      Text["CommunicatingClasses"]], 
+     TemplateBox[{RowBox[{"{", 
+         RowBox[{"1", ",", "\"\[Ellipsis]\"", ",", "8"}], "}"}]},
+      "RowDefault"]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"RecurrentClasses\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"23776d41-a4cd-49d6-a948-5f12d09bce24"],
+      Text["RecurrentClasses"]], 
+     TemplateBox[{RowBox[{"{", 
+         RowBox[{"1", ",", "\"\[Ellipsis]\"", ",", "8"}], "}"}]},
+      "RowDefault"]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"TransientClasses\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"ad09e079-5e9a-47cd-bc72-d3f8a21a674c"],
+      Text["TransientClasses"]], "None"},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"AbsorbingClasses\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"67d2afd8-4184-44da-aca0-a40d55ccc1b9"],
+      Text["AbsorbingClasses"]], "None"},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"PeriodicClasses\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"526e00c9-cd6f-4b70-aca8-39f28d03ec6b"],
+      Text["PeriodicClasses"]], "None"},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"Periods\"\>", TextForm]], "InlineText",ExpressionUUID->
+       "6bea2441-b2b8-4cd9-aa4c-50bfb0259117"],
+      Text["Periods"]], 
+     RowBox[{"{", "}"}]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"Irreducible\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"2f840248-8f8e-4040-97ee-bc0377598379"],
+      Text["Irreducible"]], "True"},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"Aperiodic\"\>", TextForm]], "InlineText",ExpressionUUID->
+       "c4b845e0-9607-40c6-8b9a-3f88c897870c"],
+      Text["Aperiodic"]], "True"},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"Primitive\"\>", TextForm]], "InlineText",ExpressionUUID->
+       "646b63a7-8824-4aec-babd-4b268601cbeb"],
+      Text["Primitive"]], "True"},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox[
+        StyleBox["\<\"Limiting Properties\"\>",
+         StripOnInput->False,
+         FontWeight->Bold], TextForm]], "InlineText",ExpressionUUID->
+       "e18cebe3-e25f-4ac1-9a6b-e04490d74284"],
+      Text[
+       Style["Limiting Properties", Bold]]], "\[SpanFromLeft]"},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"LimitTransitionMatrix\"\>", TextForm]], "InlineText",
+       ExpressionUUID->"fbd6ada9-7df1-4b4b-85cc-967e914d5574"],
+      Text["LimitTransitionMatrix"]], 
+     GraphicsBox[RasterBox[CompressedData["
+1:eJxTTMoPSmVmYGDggGIQGwI+2D+sElnn/vCWPQMKGBUfFR8VHxUfFR+u4gDz
+bmUP
+       "], {{0, 0}, {8, 8}}, {0, 1}],
+      Frame->True,
+      FrameLabel->{None, None},
+      FrameTicks->{{False, False}, {False, False}},
+      GridLinesStyle->Directive[
+        GrayLevel[0.5, 0.4]],
+      ImageSize->Tiny,
+      Method->{
+       "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> Automatic, 
+        "DefaultPlotStyle" -> Automatic, "DomainPadding" -> Scaled[0.02], 
+        "RangePadding" -> Scaled[0.05]}]},
+    {
+     InterpretationBox[Cell[BoxData[
+       FormBox["\<\"Reversible\"\>", TextForm]], "InlineText",ExpressionUUID->
+       "218f604c-27b4-4d46-83ef-ec165e092668"],
+      Text["Reversible"]], "True"}
+   },
+   AutoDelete->False,
+   BaseStyle->{FontFamily -> "Times"},
+   GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
+   GridBoxBackground->{"Columns" -> {{
+        RGBColor[1., 1., 0.85]}}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+   GridBoxSpacings->{"Columns" -> {{1}}, "Rows" -> {{1}}}],
+  "Grid"]], "Output",
+ CellChangeTimes->{
+  3.7810016375989523`*^9},ExpressionUUID->"ef4a64bc-bf17-49fe-aaeb-\
+4824afdf98e6"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"PDF", "[", 
+     RowBox[{
+      RowBox[{"StationaryDistribution", "[", "p3", "]"}], ",", "#"}], "]"}], 
+    " ", "&"}], ")"}], " ", "/@", " ", 
+  RowBox[{"Range", "[", "8", "]"}]}]], "Input",
+ CellChangeTimes->{{3.781001648740451*^9, 
+  3.781001673619982*^9}},ExpressionUUID->"eb8c09c3-02a4-464a-bb25-\
+8a62bde8e4af"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   FractionBox["1", "8"], ",", 
+   FractionBox["1", "8"], ",", 
+   FractionBox["1", "8"], ",", 
+   FractionBox["1", "8"], ",", 
+   FractionBox["1", "8"], ",", 
+   FractionBox["1", "8"], ",", 
+   FractionBox["1", "8"], ",", 
+   FractionBox["1", "8"]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.78100167634606*^9},ExpressionUUID->"2f66807a-1d62-47eb-bf0f-6acee65ec933"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{808, 621},
+WindowMargins->{{182, Automatic}, {Automatic, 43}},
+FrontEndVersion->"11.2 for Linux x86 (64-bit) (September 10, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 358, 7, 107, "Section",ExpressionUUID->"208c0469-ca1d-4623-8092-c1ff3053ea94"],
+Cell[941, 31, 1181, 31, 124, "Input",ExpressionUUID->"0ebf98be-4c3d-4515-833e-6d46586c9d35"],
+Cell[CellGroupData[{
+Cell[2147, 66, 212, 4, 31, "Input",ExpressionUUID->"0cae4bd3-12ab-4f6f-878a-2e2ace0184ab"],
+Cell[2362, 72, 1331, 30, 211, "Output",ExpressionUUID->"e263afaf-0a6f-4a20-b177-71dce81b7d4e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3730, 107, 123, 1, 31, "Input",ExpressionUUID->"96527b8f-4d3f-4439-bb9a-d2c9e0fb4d5b"],
+Cell[3856, 110, 1032, 31, 149, "Output",ExpressionUUID->"230daf2b-c5ca-45c5-913b-b68b61b55b11"]
+}, Open  ]],
+Cell[4903, 144, 756, 18, 55, "Input",ExpressionUUID->"af6a61c9-2f4b-470c-bcdd-3fd0dfa21f17"],
+Cell[CellGroupData[{
+Cell[5684, 166, 161, 4, 31, "Input",ExpressionUUID->"c2c03a38-80fd-4924-b426-fca2eb87b95f"],
+Cell[5848, 172, 5875, 130, 376, "Output",ExpressionUUID->"d2eed02a-cde4-4bcc-aba1-5711a62e92bb"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11760, 307, 228, 4, 31, "Input",ExpressionUUID->"87a79418-f93d-4887-a4b0-53880d8d019b"],
+Cell[11991, 313, 6957, 172, 725, "Output",ExpressionUUID->"8378d373-a6e0-4f04-87e0-17b7f1ca4ece"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18985, 490, 764, 18, 55, "Input",ExpressionUUID->"831c2050-603e-4d47-8973-077376c7f07f"],
+Cell[19752, 510, 400, 10, 53, "Output",ExpressionUUID->"0512da51-f636-452d-bf53-1f8238e29bcb"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20201, 526, 411, 8, 107, "Section",ExpressionUUID->"2a3159e3-afab-418e-83dd-275e7a44c503"],
+Cell[20615, 536, 687, 20, 101, "Input",ExpressionUUID->"c827019c-7b78-47ba-8bc6-529524e9c89a"],
+Cell[CellGroupData[{
+Cell[21327, 560, 204, 4, 31, "Input",ExpressionUUID->"5600c55a-3c98-4053-a539-906fcdc735d7"],
+Cell[21534, 566, 2410, 45, 290, "Output",ExpressionUUID->"b90e2c4b-9c17-45f2-a958-8cd97fbeba19"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23981, 616, 193, 4, 31, "Input",ExpressionUUID->"bf114bd9-761f-4e2f-a5cd-e74a534d83b4"],
+Cell[24177, 622, 1631, 50, 269, "Output",ExpressionUUID->"5ed821b6-1c92-4fdc-b08e-12bfecdb85c3"]
+}, Open  ]],
+Cell[25823, 675, 575, 14, 55, "Input",ExpressionUUID->"e47f3d6b-6855-49a5-a505-b177244e5c61"],
+Cell[CellGroupData[{
+Cell[26423, 693, 114, 1, 31, "Input",ExpressionUUID->"5a86335e-754f-403f-bf78-26b09efba68a"],
+Cell[26540, 696, 14751, 317, 316, "Output",ExpressionUUID->"ec24c904-4330-421a-a36f-0fa58e344ca2"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[41328, 1018, 205, 4, 31, "Input",ExpressionUUID->"334e7fe7-b62b-405f-b314-dd9040c54d8b"],
+Cell[41536, 1024, 7966, 195, 721, "Output",ExpressionUUID->"3c36f258-1ee1-4aa5-a0b3-ff06da2df43e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[49539, 1224, 382, 11, 31, "Input",ExpressionUUID->"5ab6ec82-c7d5-4591-988a-f73276af70ef"],
+Cell[49924, 1237, 437, 13, 53, "Output",ExpressionUUID->"d7b39861-9c7b-4d8d-9062-66474ced5258"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[50410, 1256, 451, 9, 107, "Section",ExpressionUUID->"7dfbdd33-6eae-47f3-bdf9-199ae3493a92"],
+Cell[CellGroupData[{
+Cell[50886, 1269, 371, 6, 58, "Subsection",ExpressionUUID->"9a249a50-27a1-44c3-ab8f-a1ad538aa4ae"],
+Cell[51260, 1277, 957, 14, 93, "Text",ExpressionUUID->"47762b1b-195e-4f07-8bb4-addb626cb2dc"],
+Cell[52220, 1293, 1662, 47, 193, "Input",ExpressionUUID->"71996447-c7f6-412b-a69d-0a6562fce437"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[53919, 1345, 527, 8, 58, "Subsection",ExpressionUUID->"e2b87113-a775-4ae6-90af-a1fb269e9ce9"],
+Cell[54449, 1355, 277, 6, 35, "Text",ExpressionUUID->"9ce6e6a6-e17f-4507-996f-37f1b1b4ab60"],
+Cell[54729, 1363, 898, 27, 55, "Input",ExpressionUUID->"73ea53be-f3ba-42c2-9f55-36acbdd8b7f9"],
+Cell[55630, 1392, 1321, 36, 66, "Input",ExpressionUUID->"cfd641bd-4f55-43a4-b00f-f9a2d47183d2"],
+Cell[CellGroupData[{
+Cell[56976, 1432, 235, 6, 31, "Input",ExpressionUUID->"9ac4b35c-308a-460e-89a5-704d9916c388"],
+Cell[57214, 1440, 2637, 90, 269, "Output",ExpressionUUID->"0e45ece1-aad0-45a5-8af5-2f76f8cda65c"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[59888, 1535, 233, 6, 31, "Input",ExpressionUUID->"b69cadb6-13b2-45c7-8ddf-31c2c6b1cf87"],
+Cell[60124, 1543, 2698, 89, 269, "Output",ExpressionUUID->"bdd9227a-41a3-46f7-b41d-5998ec0c34b4"]
+}, Open  ]],
+Cell[62837, 1635, 264, 6, 35, "Text",ExpressionUUID->"20ea4ffb-89ac-42a7-a9c9-51fd5cacb836"],
+Cell[CellGroupData[{
+Cell[63126, 1645, 426, 12, 31, "Input",ExpressionUUID->"96266d8a-5c77-4f47-9574-18aad036b73d"],
+Cell[63555, 1659, 241, 7, 35, "Output",ExpressionUUID->"43b9f7b3-9e34-4345-849a-7223814edc96"]
+}, Open  ]],
+Cell[63811, 1669, 643, 17, 55, "Input",ExpressionUUID->"ec0f7782-5c31-4568-b4d8-625528bf2974"],
+Cell[CellGroupData[{
+Cell[64479, 1690, 185, 4, 31, "Input",ExpressionUUID->"12aaae5f-4796-4fce-a6aa-07163e9af2ac"],
+Cell[64667, 1696, 36915, 768, 368, "Output",ExpressionUUID->"53579fb1-fda2-45d2-af22-284e4d324808"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[101619, 2469, 205, 4, 31, "Input",ExpressionUUID->"e5aa55ed-6d9f-45bf-a3d7-70b3a3ae4207"],
+Cell[101827, 2475, 8080, 196, 721, "Output",ExpressionUUID->"ef4a64bc-bf17-49fe-aaeb-4824afdf98e6"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[109944, 2676, 382, 11, 31, "Input",ExpressionUUID->"eb8c09c3-02a4-464a-bb25-8a62bde8e4af"],
+Cell[110329, 2689, 408, 12, 53, "Output",ExpressionUUID->"2f66807a-1d62-47eb-bf0f-6acee65ec933"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
