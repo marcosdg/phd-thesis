@@ -12,7 +12,7 @@ from itertools import groupby
 #   Input: ls
 #   Output: ls without duplicate elements
 #
-#   Note: remove_duplicates works also there are nested lists within ls.
+#   Note: remove_duplicates also works if there are nested lists within ls.
 def remove_duplicates(ls):
     # groupby needs ls to be sorted first
     new = sorted(ls)
@@ -20,16 +20,16 @@ def remove_duplicates(ls):
 
 # ls1_setminus_ls2(ls1, ls2):
 #   Input:  ls1, the list we want to remove elements from.
-#   Input:  ls2, with the elements we want to remove in ls1.
-#   Output: ls1 setminus ls2: all elements in ls1 not appearing in ls2.
+#   Input:  ls2, the list with elements we want to remove in ls1.
+#   Output: ls1 setminus ls2,  all elements in ls1 not appearing in ls2.
 #
 #   Examples:
-#       ls1 = [1,2,3,4], ls2 = [2,3], out = [1,4]
-#       ls1 = [2,3,9], ls1 = [1,2,2,4,3], out = [9]
+#       ls1 = [1,2,3,4], ls2 = [2,3],       out = [1,4]
+#       ls1 = [2,3,9],   ls2 = [1,2,2,4,3], out = [9]
 #
-#   Note: removing duplicates in ls2 beforehand is harmless to the end
-#   result, because all we care in ls2 is which elements appear, not their
-#   order or number of occurrences.
+#   Note: removing duplicates in ls2 beforehand is harmless to the end result.
+#   All we care in ls2 is which elements appear, not their order or number of
+#   occurrences.
 def ls1_setminus_ls2(ls1, ls2):
     ls2_set = set(ls2)
     return [item for item in ls1 if item not in ls2]
@@ -74,13 +74,12 @@ def davis_xover(x, y, i, j):
             z.insert(at, filler)
     return z
 
-
-# all_davis_xover(x, y):
+# symmetric_davis_xover(x, y):
 #   Input: parent x
 #   Input: parent y
 #   Output: all possible different offspring obtained using davis order
 #           crossover on parent x and y, for all possible crossover sections.
-def all_davis_xover(x, y):
+def symmetric_davis_xover(x, y):
     oll = []
     length = len(x)
 
@@ -105,10 +104,10 @@ def main():
     #x4 = ['A','B','C','D','E','F','G']
     #y4 = ['D','B','A','C','G','F','E']
 
-    all1 = all_davis_xover(x1, y1)
-    #all2 = all_davis_xover(x2, y2)
-    #all3 = all_davis_xover(x3, y3)
-    #all4 = all_davis_xover(x4, y4)
+    all1 = symmetric_davis_xover(x1, y1)
+    #all2 = symmetric_davis_xover(x2, y2)
+    #all3 = symmetric_davis_xover(x3, y3)
+    #all4 = symmetric_davis_xover(x4, y4)
 
     print("Parent x: " + str(x1))
     print("Parent y: " + str(y1))
