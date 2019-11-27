@@ -4,19 +4,32 @@
 # 26 Oct 2018
 
 
-from itertools import groupby
+import itertools
 
 ## AUXILIARY FUNCTIONS
 
 # remove_duplicates(ls):
-#   Input: ls
+#   Input:  list ls
 #   Output: ls without duplicate elements
 #
-#   Note: remove_duplicates also works if there are nested lists within ls.
+#   Note: remove_duplicates also works if ls is a list of lists.
 def remove_duplicates(ls):
     # groupby needs ls to be sorted first
     new = sorted(ls)
-    return list(key for key,val in groupby(new))
+    return list(key for key,val in itertools.groupby(new))
+
+# flatten(ls):
+#   Input:  list ls
+#   Output: flattens all nested lists of ls
+#
+#   Example:
+#       ls1             =  [[1,2], [2,3]]
+#       ls2             =  [[1,2,3], [1,2,3], [[1,2,3],[3,2,1]]]
+#       flatten(ls1)    =  [1,2,2,3]
+#       flatten(ls2)    =  [1, 2, 3, 1, 2, 3, [1, 2, 3], [3, 2, 1]]
+#       
+def flatten(ls):
+    return list(itertools.chain.from_iterable(ls))
 
 # ls1_setminus_ls2(ls1, ls2):
 #   Input:  ls1, the list we want to remove elements from.
@@ -27,6 +40,7 @@ def remove_duplicates(ls):
 #       ls1 = [1,2,3,4], ls2 = [2,3],       out = [1,4]
 #       ls1 = [2,3,9],   ls2 = [1,2,2,4,3], out = [9]
 #
+#   Note: ls1 and ls2 MUST NOT contain nested lists
 #   Note: removing duplicates in ls2 beforehand is harmless to the end result.
 #   All we care in ls2 is which elements appear, not their order or number of
 #   occurrences.
@@ -74,12 +88,30 @@ def davis_xover(x, y, i, j):
             z.insert(at, filler)
     return z
 
-# symmetric_davis_xover(x, y):
+# davis_xover_support(x, y):
+#   Input: x, the 1st  parent used as the ‘cutter’ string.
+#   Input: y, the 2nd parent used as the ‘filler’ string.
+#   Output: all possible different offspring obtained using davis order
+#           crossover on parents x and y, for all possible crossover sections.
+def davis_xover_support(x,y):
+    oll = []
+    length = len(x)
+
+    for i in range(0, length):
+        for j in range(i, length):
+            z = davis_xover(x,y,i,j)
+            oll.append(z)
+    return remove_duplicates(oll)
+
+## SYMMETRIC DAVIS ORDER CROSSOVER
+#
+# symmetric_davis_xover_support(x, y):
 #   Input: parent x
 #   Input: parent y
 #   Output: all possible different offspring obtained using davis order
-#           crossover on parent x and y, for all possible crossover sections.
-def symmetric_davis_xover(x, y):
+#           crossover on parent pairs (x,y) and (y,x), for all possible
+#           crossover sections.
+def symmetric_davis_xover_support(x, y):
     oll = []
     length = len(x)
 
@@ -89,8 +121,31 @@ def symmetric_davis_xover(x, y):
             z2 = davis_xover(y, x, i, j)
             oll.append(z1)
             oll.append(z2)
-
     return remove_duplicates(oll)
+
+## RECURSIVE CLOSURE FOR (DAVIS ORDER) CROSSOVERS
+#
+# closure(xover,sett,k):
+#   Input: xover, a binary crossover function. For instance, davis_xover_support
+#          or its symmetric_davis_xover_support.
+#   Input: sett, a set of individuals (permutations)
+#   Input: k, a natural number (number of recursive calls)
+#   Output: all possible descendants that can be obtained by applying xover
+#           crossover to the input set sett, and then again to the offspring
+#           set, and again to the grandchildren, for as many times as k.
+def closure(xover,sett,k):
+    closed = []
+    offs = []
+
+    if k == 0:
+        closed = sett
+    else:
+        for x in sett:
+            for y in sett:
+                offs.append(xover(x,y))
+        offs = remove_duplicates(flatten(offs))
+        closed = closure(xover, offs, k-1)
+    return closed
 
 ## MAIN
 def main():
@@ -104,10 +159,12 @@ def main():
     #x4 = ['A','B','C','D','E','F','G']
     #y4 = ['D','B','A','C','G','F','E']
 
-    all1 = symmetric_davis_xover(x1, y1)
-    #all2 = symmetric_davis_xover(x2, y2)
-    #all3 = symmetric_davis_xover(x3, y3)
-    #all4 = symmetric_davis_xover(x4, y4)
+    all1 = symmetric_davis_xover_support(x1, y1)
+    #all2 = davis_xover_support(x1, y1)
+    #closure_davis_1 = closure(davis_xover_support, [x1,y1], 1)
+    #closure_davis_2 = closure(davis_xover_support, [x1,y1],2)
+    #closure_symdavis_1 = closure(symmetric_davis_xover_support, [x1,y1],1)
+    #closure_symdavis_2 = closure(symmetric_davis_xover_support, [x1,y1],2)
 
     print("Parent x: " + str(x1))
     print("Parent y: " + str(y1))
