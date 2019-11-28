@@ -31,7 +31,7 @@ def remove_duplicates(ls):
 def flatten(ls):
     return list(itertools.chain.from_iterable(ls))
 
-# ls1_setminus_ls2(ls1, ls2):
+# ls1_setminus_ls2(ls1,ls2):
 #   Input:  ls1, the list we want to remove elements from.
 #   Input:  ls2, the list with elements we want to remove in ls1.
 #   Output: ls1 setminus ls2,  all elements in ls1 not appearing in ls2.
@@ -44,13 +44,13 @@ def flatten(ls):
 #   Note: removing duplicates in ls2 beforehand is harmless to the end result.
 #   All we care in ls2 is which elements appear, not their order or number of
 #   occurrences.
-def ls1_setminus_ls2(ls1, ls2):
+def ls1_setminus_ls2(ls1,ls2):
     ls2_set = set(ls2)
     return [item for item in ls1 if item not in ls2]
 
 ## DAVIS ORDER CROSSOVER
 #
-# davis_xover(x, y, i, j):
+# davis_xover(x,y,i,j):
 #   Input: x, the 1st  parent used as the ‘cutter’ string.
 #   Input: y, the 2nd parent used as the ‘filler’ string.
 #   Input: i, the index for the start of crossover section.
@@ -71,24 +71,24 @@ def ls1_setminus_ls2(ls1, ls2):
 #       2.2.1.      z[index] = remaining[0] # copy next unused filler
 #       2.2.2.      remaining.pop(0)        # remove the filler just used
 #
-def davis_xover(x, y, i, j):
+def davis_xover(x,y,i,j):
     # Init
     z = []
     length = len(x)
-    xover_sect = x[i:j+1] # [i, j + 1) = [i, j]
+    xover_sect = x[i:(j+1)] # [i, j + 1) = [i, j]
     # Main
-    fillers = ls1_setminus_ls2(y, xover_sect)
+    fillers = ls1_setminus_ls2(y,xover_sect)
     for at in range(length):
         # copy xover section
         if i <= at <= j:
-            z.insert(at, x[at])
+            z.insert(at,x[at])
         # use fillers
         else:
             filler = fillers.pop(0) # pop returns 1st elem and deletes it.
-            z.insert(at, filler)
+            z.insert(at,filler)
     return z
 
-# davis_xover_support(x, y):
+# davis_xover_support(x,y):
 #   Input: x, the 1st  parent used as the ‘cutter’ string.
 #   Input: y, the 2nd parent used as the ‘filler’ string.
 #   Output: all possible different offspring obtained using davis order
@@ -97,28 +97,28 @@ def davis_xover_support(x,y):
     oll = []
     length = len(x)
 
-    for i in range(0, length):
-        for j in range(i, length):
+    for i in range(0,length):
+        for j in range(i,length):
             z = davis_xover(x,y,i,j)
             oll.append(z)
     return remove_duplicates(oll)
 
 ## SYMMETRIC DAVIS ORDER CROSSOVER
 #
-# symmetric_davis_xover_support(x, y):
+# symmetric_davis_xover_support(x,y):
 #   Input: parent x
 #   Input: parent y
 #   Output: all possible different offspring obtained using davis order
 #           crossover on parent pairs (x,y) and (y,x), for all possible
 #           crossover sections.
-def symmetric_davis_xover_support(x, y):
+def symmetric_davis_xover_support(x,y):
     oll = []
     length = len(x)
 
-    for i in range(0, length):
-        for j in range(i, length):
-            z1 = davis_xover(x, y, i, j)
-            z2 = davis_xover(y, x, i, j)
+    for i in range(0,length):
+        for j in range(i,length):
+            z1 = davis_xover(x,y,i,j)
+            z2 = davis_xover(y,x,i,j)
             oll.append(z1)
             oll.append(z2)
     return remove_duplicates(oll)
@@ -144,7 +144,7 @@ def closure(xover,sett,k):
             for y in sett:
                 offs.append(xover(x,y))
         offs = remove_duplicates(flatten(offs))
-        closed = closure(xover, offs, k-1)
+        closed = closure(xover,offs,k-1)
     return closed
 
 ## MAIN
@@ -153,18 +153,18 @@ def main():
     x1 = [1,2,3]
     y1 = [3,1,2]
     #x2 = [1,2,3,4]
-    #y2 = [2,3,4,3]
+    #y2 = [2,3,4,1]
     #x3 = ['A','B','C','D']
     #y3 = ['B','A','D','C']
     #x4 = ['A','B','C','D','E','F','G']
     #y4 = ['D','B','A','C','G','F','E']
 
-    all1 = symmetric_davis_xover_support(x1, y1)
-    #all2 = davis_xover_support(x1, y1)
+    all1 = symmetric_davis_xover_support(x1,y1)
+    #all2 = davis_xover_support(x1,y1)
     #closure_davis_1 = closure(davis_xover_support, [x1,y1], 1)
-    #closure_davis_2 = closure(davis_xover_support, [x1,y1],2)
-    #closure_symdavis_1 = closure(symmetric_davis_xover_support, [x1,y1],1)
-    #closure_symdavis_2 = closure(symmetric_davis_xover_support, [x1,y1],2)
+    #closure_davis_2 = closure(davis_xover_support, [x1,y1], 2)
+    #closure_symdavis_1 = closure(symmetric_davis_xover_support, [x1,y1], 1)
+    #closure_symdavis_2 = closure(symmetric_davis_xover_support, [x1,y1], 2)
 
     print("Parent x: " + str(x1))
     print("Parent y: " + str(y1))
